@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
             "}";
     String configDataSandbox = "{" +
             "\"botName\": \"Dominos\"," +
-            "\"botID\": \"x1562641985697\"" +
+            "\"botID\": \"x1569558732722\"" +
             "}";
     HashMap<String, Object> payloadData = new HashMap<>();
 
@@ -34,9 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         YMBotPlugin pluginYM = new YMBotPlugin();
         pluginYM.initYMPlugin(this ,configDataSandbox);
-        payloadData.put("fullScreen", true);
+        payloadData.put("Platform", "Android-App");
         pluginYM.setPayload(payloadData);
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
            pluginYM.startChatBot();
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }

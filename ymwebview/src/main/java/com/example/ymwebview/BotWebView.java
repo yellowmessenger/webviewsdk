@@ -1,11 +1,9 @@
 package com.example.ymwebview;
 
-import android.Manifest;
 import android.app.Activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 
 import android.os.Build;
@@ -14,14 +12,14 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.webkit.GeolocationPermissions;
+
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Toast;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
+import com.example.ymwebview.models.BotEventsModel;
 import com.example.ymwebview.models.ConfigDataModel;
+import com.example.ymwebview.models.JavaScriptInterface;
 import com.google.gson.Gson;
 
 import java.util.Map;
@@ -60,13 +58,19 @@ public class BotWebView extends Activity implements  AdvancedWebView.Listener{
         myWebView = new AdvancedWebView(context);
         myWebView.setListener(this, this);
 
-        String botUrl = "https://app.yellowmessenger.com/pwa/mobile/"+botId+"?ym.payload="+payloadJSON;
+        String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId="+botId+"&ym.payload="+payloadJSON;
         Log.d(TAG, "onCreate: "+botUrl);
 
         myWebView.loadUrl(botUrl);
 
         myWebView.getSettings().setSupportMultipleWindows(true);
         myWebView.getSettings().setGeolocationDatabasePath( context.getFilesDir().getPath() );
+
+        myWebView.addJavascriptInterface(new JavaScriptInterface(this, myWebView), "YMHandler");
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
+
         myWebView.setWebChromeClient(new WebChromeClient() {
 
             @Override
@@ -83,34 +87,8 @@ public class BotWebView extends Activity implements  AdvancedWebView.Listener{
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
-                if(title == "Domino\'s"){
-                    Toast.makeText(BotWebView.this, "This is the first page.", Toast.LENGTH_SHORT).show();
-                }
-                else
+
                     Toast.makeText(BotWebView.this, title, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onGeolocationPermissionsShowPrompt(String origin,
-                                                           GeolocationPermissions.Callback callback) {
-                // Geolocation permissions coming from this app's Manifest will only be valid for devices with
-                // API_VERSION < 23. On API 23 and above, we must check for permissions, and possibly
-                // ask for them.
-                String perm = Manifest.permission.ACCESS_FINE_LOCATION;
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
-                        ContextCompat.checkSelfPermission(BotWebView.this, perm) == PackageManager.PERMISSION_GRANTED) {
-                    // we're on SDK < 23 OR user has already granted permission
-                    callback.invoke(origin, true, false);
-                } else {
-                    if (!ActivityCompat.shouldShowRequestPermissionRationale(BotWebView.this, perm)) {
-                        // ask the user for permission
-                        ActivityCompat.requestPermissions(BotWebView.this, new String[] {perm}, REQUEST_FINE_LOCATION);
-
-                        // we will use these when user responds
-                        geolocationOrigin = origin;
-                        geolocationCallback = callback;
-                    }
-                }
             }
 
 
@@ -131,7 +109,6 @@ public class BotWebView extends Activity implements  AdvancedWebView.Listener{
 
     @Override
     public void onPageStarted(String url, Bitmap favicon) {
-//        myWebView.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -160,4 +137,25 @@ public class BotWebView extends Activity implements  AdvancedWebView.Listener{
         super.onActivityResult(requestCode, resultCode, intent);
         myWebView.onActivityResult(requestCode, resultCode, intent);
     }
+
+    public void emitEvent(BotEventsModel event){
+        Log.v("WebView","From Bot: "+event.getCode());
+        switch (event.getCode()){
+            case "test" : Log.d("Event case testing: ", "Event test");
+            break;
+            case "track-order" : Log.d("Event case testing: ", "Event track-order");
+            break;
+            case "combos-and-offers" : Log.d("Event case testing: ", "Event combos-and-offer");
+            break;
+            case "token-expire" : Log.d("Event case testing: ", "Event token-expire");
+            break;
+            case "login-user" : Log.d("Event case testing: ", "Event login-user");
+            break;
+            case "stores-near-me" : Log.d("Event case testing: ", "Event stores-near-me");
+            break;
+        }
+    }
+
 }
+
+
