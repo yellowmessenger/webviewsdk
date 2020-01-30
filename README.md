@@ -19,12 +19,11 @@ App level gradle file
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.github.yellowmessenger:webviewsdk:TAG'
+    implementation 'com.github.yellowmessenger:webviewsdk:0.0.1'
 
 }
 ```
-
-Android Application class
+Android Application class Example
 ```java
 import com.example.ymwebview.BotEventListener;
 import com.example.ymwebview.YMBotPlugin;
