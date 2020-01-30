@@ -5,6 +5,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 
 import com.example.ymwebview.BotWebView;
+import com.example.ymwebview.YMBotPlugin;
 import com.google.gson.Gson;
 
 
@@ -34,6 +35,8 @@ public class JavaScriptInterface {
     @JavascriptInterface
     public void  receiveMessage(String s) {
         BotEventsModel incomingEvent = new Gson().fromJson(s, BotEventsModel.class);
-        this.parentActivity.emitEvent(incomingEvent);
+//        this.parentActivity.emitEvent(incomingEvent);
+        YMBotPlugin.getInstance().emitEvent(incomingEvent);
+
     }
 }

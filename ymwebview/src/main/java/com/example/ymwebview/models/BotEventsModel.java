@@ -1,8 +1,6 @@
 package com.example.ymwebview.models;
 
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class BotEventsModel{
 

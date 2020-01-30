@@ -40,9 +40,7 @@ public class ConfigDataModel{
     }
 
     public boolean setPayload(Map botPayload) {
-
-
-        if (!botPayload.isEmpty()) {
+        if (botPayload !=null) {
             payload.putAll(botPayload);
             return true;
         }

@@ -36,6 +36,7 @@ public class BotWebView extends Activity implements  AdvancedWebView.Listener{
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,24 +137,6 @@ public class BotWebView extends Activity implements  AdvancedWebView.Listener{
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         myWebView.onActivityResult(requestCode, resultCode, intent);
-    }
-
-    public void emitEvent(BotEventsModel event){
-        Log.v("WebView","From Bot: "+event.getCode());
-        switch (event.getCode()){
-            case "test" : Log.d("Event case testing: ", "Event test");
-            break;
-            case "track-order" : Log.d("Event case testing: ", "Event track-order");
-            break;
-            case "combos-and-offers" : Log.d("Event case testing: ", "Event combos-and-offer");
-            break;
-            case "token-expire" : Log.d("Event case testing: ", "Event token-expire");
-            break;
-            case "login-user" : Log.d("Event case testing: ", "Event login-user");
-            break;
-            case "stores-near-me" : Log.d("Event case testing: ", "Event stores-near-me");
-            break;
-        }
     }
 
 }

@@ -2,13 +2,16 @@ package com.yellowmessenger.dominossample;
 
 import android.os.Bundle;
 
+import com.example.ymwebview.BotEventListener;
 import com.example.ymwebview.YMBotPlugin;
+import com.example.ymwebview.models.BotEventsModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -32,10 +35,31 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        YMBotPlugin pluginYM = new YMBotPlugin();
-        pluginYM.initYMPlugin(this ,configDataSandbox);
+        YMBotPlugin pluginYM =  YMBotPlugin.getInstance();
+        pluginYM.init(this ,configDataSandbox, new BotEventListener() {
+
+            @Override
+            public void onSuccess(BotEventsModel botEvent) {
+                Log.d("EventListener", "Event Recieved: "+ botEvent.getCode());
+                switch (botEvent.getCode()){
+                    case "test" : break;
+                    case "track-order" : break;
+                    case "combos-and-offers" :  break;
+                    case "token-expire" : break;
+                    case "login-user" : break;
+                    case "stores-near-me" :  break;
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+            }
+        });
+
         payloadData.put("Platform", "Android-App");
         pluginYM.setPayload(payloadData);
+
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
            pluginYM.startChatBot();
@@ -63,4 +87,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
