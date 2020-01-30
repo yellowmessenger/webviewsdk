@@ -5,6 +5,10 @@ Yellow Messenger WebView SDK
 
 Root level gradle file
 ```gradle
+
+```
+App level gradle file
+```gradle
 allprojects {
     repositories {
         jcenter()
@@ -13,12 +17,14 @@ allprojects {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
 }
-```
-App level gradle file
-```gradle
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+...
+...
+...
+
+dependencies {
+    ...
+    ...
     implementation 'com.github.yellowmessenger:webviewsdk:0.0.1'
 
 }
