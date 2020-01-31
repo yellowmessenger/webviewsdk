@@ -3,10 +3,7 @@ Yellow Messenger WebView SDK
 
 ### Configuration
 
-Root level gradle file
-```gradle
 
-```
 App level gradle file
 ```gradle
 allprojects {
@@ -39,32 +36,34 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        //Configuration data
         String configData = "{" +
-            "\"botName\": \"Dominos\"," +
-            "\"botID\": \"x1572447766397\"" +
+            "\"botName\": \"Bot-Name\"," +
+            "\"botID\": \"<REPLACE-WITH-BOT-ID>\"" +
             "}";
+        //Payload attributes
         HashMap<String, Object> payloadData = new HashMap<>();
+        //Important
         payloadData.put("platform","Android-App");
+        
         payloadData.put("user-id","");
         payloadData.put("access-token","");
         payloadData.put("refresh-token","");
         payloadData.put("mobile-number","");
-        payloadData.put("order-id","");
         payloadData.put("journey-slug","");
-        payloadData.put("user-state","Android-App");
-        YMBotPlugin pluginYM =  YMBotPlugin.getInstance();
+        payloadData.put("user-state","");
+        //You can add other payload attributes in the same format.
         
+        //Initialize the bot
+        YMBotPlugin pluginYM =  YMBotPlugin.getInstance();
         pluginYM.init(this ,configDataSandbox, new BotEventListener() {
             @Override
             public void onSuccess(BotEventsModel botEvent) {
                 Log.d("EventListener", "Event Recieved: "+ botEvent.getCode());
                 switch (botEvent.getCode()){
-                    case "test" : break;
-                    case "track-order" : break;
-                    case "combos-and-offers" :  break;
-                    case "token-expire" : break;
-                    case "login-user" : break;
-                    case "stores-near-me" :  break;
+                    case "even-name-1" : break;
+                    case "even-name-2" : break;
+                    case "even-name-3" : break;
                 }
             }
 
@@ -72,11 +71,13 @@ public class App extends Application {
             public void onFailure(String error) {
             }
         });
+        //Send Payload Data
         pluginYM.setPayload(payloadData);
         
         //To start chabot call the pluginYm.startChatBot() method.
          FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
+           //Starting the bot activity
            pluginYM.startChatBot();
         });
     }
