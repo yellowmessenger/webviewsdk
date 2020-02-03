@@ -56,7 +56,7 @@ public class App extends Application {
         
         //Initialize the bot
         YMBotPlugin pluginYM =  YMBotPlugin.getInstance();
-        pluginYM.init(this ,configDataSandbox, new BotEventListener() {
+        pluginYM.init(this ,configData, new BotEventListener() {
             @Override
             public void onSuccess(BotEventsModel botEvent) {
                 Log.d("EventListener", "Event Recieved: "+ botEvent.getCode());
