@@ -1,6 +1,7 @@
 package com.example.ymwebview.models;
 
 
+import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 
@@ -35,8 +36,7 @@ public class JavaScriptInterface {
     @JavascriptInterface
     public void  receiveMessage(String s) {
         BotEventsModel incomingEvent = new Gson().fromJson(s, BotEventsModel.class);
-//        this.parentActivity.emitEvent(incomingEvent);
+        Log.d("Event from Bot", "receiveMessage: "+incomingEvent.toString());
         YMBotPlugin.getInstance().emitEvent(incomingEvent);
-
     }
 }

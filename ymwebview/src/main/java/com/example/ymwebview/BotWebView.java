@@ -6,18 +6,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 
+
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.webkit.GeolocationPermissions;
 
 import android.webkit.WebChromeClient;
+
 import android.webkit.WebView;
+
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-import com.example.ymwebview.models.BotEventsModel;
 import com.example.ymwebview.models.ConfigDataModel;
 import com.example.ymwebview.models.JavaScriptInterface;
 import com.google.gson.Gson;
@@ -30,23 +33,26 @@ import im.delight.android.webview.AdvancedWebView;
 public class BotWebView extends Activity implements  AdvancedWebView.Listener{
     private final String TAG = "YM WebView Plugin";
     private AdvancedWebView myWebView;
-    private static final int REQUEST_FINE_LOCATION = 1;
-    private String geolocationOrigin;
-    private GeolocationPermissions.Callback geolocationCallback;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-       if(myWebView != null) setContentView(myWebView);
+        if(myWebView != null) setContentView(myWebView);
        else{
            preLoadWebView();
            setContentView(myWebView);
        }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     public boolean preLoadWebView(){
@@ -59,12 +65,14 @@ public class BotWebView extends Activity implements  AdvancedWebView.Listener{
         myWebView = new AdvancedWebView(context);
         myWebView.setListener(this, this);
 
-        String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId="+botId+"&ym.payload="+payloadJSON;
+        final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId="+botId+"&ym.payload="+payloadJSON;
+//        String botUrl = "https://a8b00ad2.ngrok.io?botId="+botId+"&ym.payload="+payloadJSON;
         Log.d(TAG, "onCreate: "+botUrl);
 
         myWebView.loadUrl(botUrl);
 
         myWebView.getSettings().setSupportMultipleWindows(true);
+//        myWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         myWebView.getSettings().setGeolocationDatabasePath( context.getFilesDir().getPath() );
 
         myWebView.addJavascriptInterface(new JavaScriptInterface(this, myWebView), "YMHandler");
@@ -72,28 +80,33 @@ public class BotWebView extends Activity implements  AdvancedWebView.Listener{
             WebView.setWebContentsDebuggingEnabled(true);
         }
 
-        myWebView.setWebChromeClient(new WebChromeClient() {
 
+
+        myWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
-                AdvancedWebView newWebView = new AdvancedWebView(context);
+                AdvancedWebView newWebView = new AdvancedWebView(BotWebView.this);
                 setContentView(newWebView);
                 WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
                 transport.setWebView(newWebView);
                 resultMsg.sendToTarget();
-
+//                view.loadUrl(botUrl);
+                newWebView.setWebViewClient(new WebViewClient() {
+                    @Override
+                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+                        browserIntent.setData(Uri.parse(url));
+                        startActivity(browserIntent);
+                        return true;
+                    }
+                });
                 return true;
             }
 
-            @Override
-            public void onReceivedTitle(WebView view, String title) {
-                super.onReceivedTitle(view, title);
-
-                    Toast.makeText(BotWebView.this, title, Toast.LENGTH_SHORT).show();
-            }
-
-
         });
+
+
+
 
         return true;
     }
@@ -110,6 +123,7 @@ public class BotWebView extends Activity implements  AdvancedWebView.Listener{
 
     @Override
     public void onPageStarted(String url, Bitmap favicon) {
+
     }
 
     @Override
@@ -138,6 +152,7 @@ public class BotWebView extends Activity implements  AdvancedWebView.Listener{
         super.onActivityResult(requestCode, resultCode, intent);
         myWebView.onActivityResult(requestCode, resultCode, intent);
     }
+
 
 }
 

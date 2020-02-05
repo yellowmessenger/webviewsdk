@@ -19,13 +19,10 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     String configData = "{" +
-            "\"botName\": \"Dominos\"," +
-            "\"botID\": \"x1572447766397\"" +
+            "\"botName\": \"Adani Electra\"," +
+            "\"botID\": \"x1565100503080\"" +
             "}";
-    String configDataSandbox = "{" +
-            "\"botName\": \"Dominos\"," +
-            "\"botID\": \"x1569558732722\"" +
-            "}";
+
     HashMap<String, Object> payloadData = new HashMap<>();
 
     @Override
@@ -36,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         YMBotPlugin pluginYM =  YMBotPlugin.getInstance();
-        pluginYM.init(this ,configDataSandbox, new BotEventListener() {
+        pluginYM.init(this ,configData, new BotEventListener() {
 
             @Override
             public void onSuccess(BotEventsModel botEvent) {
