@@ -3,8 +3,11 @@
     package="com.example.ymwebview">
 
     <application>
-        <activity android:name=".YMBotPlugin"></activity>
-        <activity android:name=".BotWebView" />
+        <activity android:name=".YmWebViewActivity"></activity>
+        <activity android:name=".YMBotPlugin" />
+        <activity
+            android:name=".BotWebView"
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

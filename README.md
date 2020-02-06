@@ -32,7 +32,7 @@ import com.example.ymwebview.BotEventListener;
 import com.example.ymwebview.YMBotPlugin;
 import com.example.ymwebview.models.BotEventsModel;
 
-public class MainActivity extends AppCompatActivity {
+public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();

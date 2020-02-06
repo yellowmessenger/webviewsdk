@@ -14,18 +14,16 @@ import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     String configData = "{" +
             "\"botName\": \"Dominos\"," +
-            "\"botID\": \"x1572447766397\"" +
-            "}";
-    String configDataSandbox = "{" +
-            "\"botName\": \"Dominos\"," +
             "\"botID\": \"x1569558732722\"" +
             "}";
+
     HashMap<String, Object> payloadData = new HashMap<>();
 
     @Override
@@ -36,18 +34,29 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         YMBotPlugin pluginYM =  YMBotPlugin.getInstance();
-        pluginYM.init(this ,configDataSandbox, new BotEventListener() {
+        pluginYM.init(this ,configData, new BotEventListener() {
 
             @Override
             public void onSuccess(BotEventsModel botEvent) {
-                Log.d("EventListener", "Event Recieved: "+ botEvent.getCode());
-                switch (botEvent.getCode()){
-                    case "test" : break;
-                    case "track-order" : break;
-                    case "combos-and-offers" :  break;
-                    case "token-expire" : break;
-                    case "login-user" : break;
-                    case "stores-near-me" :  break;
+                switch (botEvent.getCode()) {
+                    case "test":
+                        Toast.makeText(getApplicationContext(), "Recieved Event: " + botEvent.getCode() + " : " + botEvent.getData(), Toast.LENGTH_SHORT).show();
+                        break;
+                    case "track-my-order":
+                        Toast.makeText(getApplicationContext(), "Recieved Event: " + botEvent.getCode() + " : " + botEvent.getData(), Toast.LENGTH_SHORT).show();
+                        break;
+                    case "offers-and-combos":
+                        Toast.makeText(getApplicationContext(), "Recieved Event: " + botEvent.getCode() + " : " + botEvent.getData(), Toast.LENGTH_SHORT).show();
+                        break;
+                    case "renew-token":
+                        Toast.makeText(getApplicationContext(), "Recieved Event: " + botEvent.getCode() + " : " + botEvent.getData(), Toast.LENGTH_SHORT).show();
+                        break;
+                    case "login-user":
+                        Toast.makeText(getApplicationContext(), "Recieved Event: " + botEvent.getCode() + " : " + botEvent.getData(), Toast.LENGTH_SHORT).show();
+                        break;
+                    case "locate-stores":
+                        Toast.makeText(getApplicationContext(), "Recieved Event: " + botEvent.getCode() + " : " + botEvent.getData(), Toast.LENGTH_SHORT).show();
+                        break;
                 }
             }
 

@@ -4,15 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BotWebView">
-
-
-    <im.delight.android.webview.AdvancedWebView
-        android:id="@+id/webview1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </im.delight.android.webview.AdvancedWebView>
-
+    tools:context=".YmWebViewActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

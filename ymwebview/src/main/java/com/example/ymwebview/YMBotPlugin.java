@@ -1,8 +1,8 @@
 package com.example.ymwebview;
 
-
 import android.content.Context;
 import android.content.Intent;
+
 import android.util.Log;
 
 import com.example.ymwebview.models.BotEventsModel;
@@ -20,6 +20,7 @@ public class YMBotPlugin {
     private boolean isInitialized;
 
     private YMBotPlugin(){}
+
 
     public static  YMBotPlugin getInstance(){
         if (botPluginInstance == null) {
@@ -52,12 +53,12 @@ public class YMBotPlugin {
 
     public void setPayload(Map botPayload){
         ConfigDataModel.getInstance().setPayload(botPayload);
-        _intent = new Intent(myContext, BotWebView.class);
+        _intent = new Intent(myContext, YmWebViewActivity.class);
     }
 
     public void emitEvent(BotEventsModel event){
         if(event != null){
-            Log.v("WebView","From Bot: "+event.getCode());
+            Log.v("WebView Event","From Bot: "+event.getCode());
             listener.onSuccess(event);
         }
         else
