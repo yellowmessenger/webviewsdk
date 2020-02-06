@@ -22,7 +22,7 @@ allprojects {
 dependencies {
     ...
     ...
-	   implementation 'com.github.yellowmessenger:webviewsdk:Tag'
+	   implementation 'com.github.yellowmessenger:webviewsdk:0.0.2'
 
 
 }
