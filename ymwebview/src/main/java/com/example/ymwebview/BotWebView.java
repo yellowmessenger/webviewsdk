@@ -86,11 +86,9 @@ public class BotWebView extends Activity implements  AdvancedWebView.Listener{
             @Override
             public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
                 AdvancedWebView newWebView = new AdvancedWebView(BotWebView.this);
-                setContentView(newWebView);
                 WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
                 transport.setWebView(newWebView);
                 resultMsg.sendToTarget();
-//                view.loadUrl(botUrl);
                 newWebView.setWebViewClient(new WebViewClient() {
                     @Override
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
