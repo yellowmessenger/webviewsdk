@@ -53,6 +53,8 @@ public class BotWebView extends Activity implements  AdvancedWebView.Listener{
     @Override
     protected void onPause() {
         super.onPause();
+        finish();
+
     }
 
     public boolean preLoadWebView(){
