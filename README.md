@@ -22,7 +22,7 @@ allprojects {
 dependencies {
     ...
     ...
-	   implementation 'com.github.yellowmessenger:webviewsdk:0.0.2'
+	   implementation 'com.github.yellowmessenger:webviewsdk:0.0.3'
 
 
 }
@@ -34,6 +34,7 @@ import com.example.ymwebview.YMBotPlugin;
 import com.example.ymwebview.models.BotEventsModel;
 
 public class MainActivity extends AppCompatActivity {
+    
     @Override
     public void onCreate() {
         super.onCreate();
