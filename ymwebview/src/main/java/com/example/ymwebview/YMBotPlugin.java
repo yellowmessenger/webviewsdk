@@ -33,12 +33,11 @@ public class YMBotPlugin {
         return  botPluginInstance;
     }
 
-    public void init(Context context, String configData, BotEventListener listener){
+    public void init(String configData, BotEventListener listener){
         if(!isInitialized){
             isInitialized = true;
-            if (context != null && configData != null && listener != null) {
+            if (configData != null && listener != null) {
                 ConfigDataModel.getInstance().setConfig(new Gson().fromJson(configData, Map.class));
-                myContext = context;
                 this.listener = listener;
             } else {
                 throw new RuntimeException("Mandatory arguments not present");
@@ -51,9 +50,12 @@ public class YMBotPlugin {
         myContext.startActivity(_intent);
     }
 
-    public void setPayload(Map botPayload){
+
+    public void setPayload(Context context, Map botPayload){
+        myContext = context;
+        ConfigDataModel.getInstance().emptyPayload();
         ConfigDataModel.getInstance().setPayload(botPayload);
-        _intent = new Intent(myContext, YmWebViewActivity.class);
+        _intent = new Intent(myContext, BotWebView.class);
     }
 
     public void emitEvent(BotEventsModel event){

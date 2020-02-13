@@ -1,157 +1,165 @@
 package com.example.ymwebview;
 
-import android.app.Activity;
+
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-
-
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Message;
+
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.util.Log;
+
 import android.view.View;
-
-import android.webkit.WebChromeClient;
-
-import android.webkit.WebView;
-
-import android.webkit.WebViewClient;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.example.ymwebview.models.ConfigDataModel;
-import com.example.ymwebview.models.JavaScriptInterface;
-import com.google.gson.Gson;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.Map;
-
-import im.delight.android.webview.AdvancedWebView;
+import java.util.ArrayList;
+import java.util.Locale;
 
 
-public class BotWebView extends Activity implements  AdvancedWebView.Listener{
+public class BotWebView extends AppCompatActivity {
     private final String TAG = "YM WebView Plugin";
-    private AdvancedWebView myWebView;
+    WebviewOverlay fh;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(myWebView != null) setContentView(myWebView);
-       else{
-           preLoadWebView();
-           setContentView(myWebView);
-       }
+        setContentView(R.layout.activity_bot_web_view);
+        fh=new WebviewOverlay(getApplicationContext());
+        FragmentManager fragManager=getSupportFragmentManager();
+        fragManager.beginTransaction()
+                .add(R.id.container,fh)
+                .commit();
+        String enableSpeech = ConfigDataModel.getInstance().getConfig("enableSpeech");
+        Log.d(TAG, "enableSpeech : "+ enableSpeech);
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    public boolean preLoadWebView(){
-        final Context context = this.getApplicationContext();
-        String botId = ConfigDataModel.getInstance().getConfig("botID");
-        Map payload = ConfigDataModel.getInstance().getPayload();
-        String payloadJSON = new Gson().toJson(payload).replace("\"", "");;
-        Log.d(TAG, "onCreate: "+payloadJSON);
-
-        myWebView = new AdvancedWebView(context);
-        myWebView.setListener(this, this);
-
-        final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId="+botId+"&ym.payload="+payloadJSON;
-//        String botUrl = "https://a8b00ad2.ngrok.io?botId="+botId+"&ym.payload="+payloadJSON;
-        Log.d(TAG, "onCreate: "+botUrl);
-
-        myWebView.loadUrl(botUrl);
-
-        myWebView.getSettings().setSupportMultipleWindows(true);
-//        myWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        myWebView.getSettings().setGeolocationDatabasePath( context.getFilesDir().getPath() );
-
-        myWebView.addJavascriptInterface(new JavaScriptInterface(this, myWebView), "YMHandler");
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            WebView.setWebContentsDebuggingEnabled(true);
+        if(Boolean.parseBoolean(enableSpeech)){
+            FloatingActionButton micButton = findViewById(R.id.floatingActionButton);
+            micButton.setVisibility(View.VISIBLE);
+            micButton.setOnClickListener(view -> {
+                toggleBottomSheet();
+            });
         }
+    }
+
+    private void speechRecognition() {
+
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH);
+        startActivityForResult(intent, 10);
+    }
+
+    public void startListeningWithoutDialog() {
+        // Intent to listen to user vocal input and return the result to the same activity.
+        Context appContext = getApplicationContext();
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+
+        // Use a language model based on free-form speech recognition.
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 5);
+        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,
+                appContext.getPackageName());
+
+        // Add custom listeners.
+        CustomRecognitionListener listener = new CustomRecognitionListener();
+        SpeechRecognizer sr = SpeechRecognizer.createSpeechRecognizer(appContext);
+        sr.setRecognitionListener(listener);
+        sr.startListening(intent);
+    }
+
+    public void toggleBottomSheet() {
+//        Toast.makeText(this, "opening Mic", Toast.LENGTH_SHORT).show();
+        fh.sendEvent("Bleh Bleh");
+        RelativeLayout voiceArea = findViewById(R.id.voiceArea);
+
+        if(voiceArea.getVisibility() == View.INVISIBLE){
+            voiceArea.setVisibility(View.VISIBLE);
+//            speechRecognition();
+            startListeningWithoutDialog();
+        }else voiceArea.setVisibility(View.INVISIBLE);
 
 
+    }
 
-        myWebView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
-                AdvancedWebView newWebView = new AdvancedWebView(BotWebView.this);
-                WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
-                transport.setWebView(newWebView);
-                resultMsg.sendToTarget();
-                newWebView.setWebViewClient(new WebViewClient() {
-                    @Override
-                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW);
-                        browserIntent.setData(Uri.parse(url));
-                        startActivity(browserIntent);
-                        return true;
-                    }
-                });
-                return true;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && data != null) {
+            switch (requestCode) {
+                case 10:
+//                    TextView textView = findViewById(R.id.speechTranscription);
+
+//                    textView.setText(data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0).toString());
+
+                    break;
             }
-
-        });
-
-
-
-
-        return true;
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (myWebView.canGoBack()) {
-            myWebView.goBack();
-        }
-        else {
-            super.onBackPressed();
+        } else {
+            Toast.makeText(getApplicationContext(), "Failed to recognize speech!", Toast.LENGTH_LONG).show();
         }
     }
+    class CustomRecognitionListener implements RecognitionListener {
+        private static final String TAG = "RecognitionListener";
 
-    @Override
-    public void onPageStarted(String url, Bitmap favicon) {
+        public void onReadyForSpeech(Bundle params) {
+            Log.d(TAG, "onReadyForSpeech");
+        }
 
-    }
+        public void onBeginningOfSpeech() {
+            Log.d(TAG, "onBeginningOfSpeech");
+        }
 
-    @Override
-    public void onPageFinished(String url) {
-        myWebView.setVisibility(View.VISIBLE);
-    }
+        public void onRmsChanged(float rmsdB) {
+            Log.d(TAG, "onRmsChanged");
 
-    @Override
-    public void onPageError(int errorCode, String description, String failingUrl) {
-        Toast.makeText(BotWebView.this, "onPageError(errorCode = "+errorCode+",  description = "+description+",  failingUrl = "+failingUrl+")", Toast.LENGTH_SHORT).show();
+        }
 
-    }
+        public void onBufferReceived(byte[] buffer) {
+            Log.d(TAG, "onBufferReceived");
+        }
 
-    @Override
-    public void onDownloadRequested(String url, String suggestedFilename, String mimeType, long contentLength, String contentDisposition, String userAgent) {
+        public void onEndOfSpeech() {
+            Log.d(TAG, "onEndofSpeech");
+        }
 
-    }
+        public void onError(int error) {
+            Log.e(TAG, "error " + error);
 
-    @Override
-    public void onExternalPageRequest(String url) {
-        Toast.makeText(BotWebView.this, "onExternalPageRequest(url = "+url+")", Toast.LENGTH_SHORT).show();
-    }
+//            conversionCallaback.onErrorOccured(TranslatorUtil.getErrorText(error));
+        }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
-        myWebView.onActivityResult(requestCode, resultCode, intent);
+        public void onResults(Bundle results) {
+            ArrayList<String> result = results
+                    .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+            TextView textView = findViewById(R.id.speechTranscription);
+            textView.setText(result.get(0));
+        }
+
+        public void onPartialResults(Bundle partialResults) {
+            Log.d(TAG, "onPartialResults"+partialResults.toString());
+
+        }
+
+        public void onEvent(int eventType, Bundle params) {
+            Log.d(TAG, "onEvent " + eventType);
+        }
     }
 
 
 }
-
 

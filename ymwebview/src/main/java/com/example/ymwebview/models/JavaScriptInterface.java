@@ -1,6 +1,7 @@
 package com.example.ymwebview.models;
 
 
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
@@ -8,8 +9,6 @@ import android.webkit.WebView;
 import com.example.ymwebview.BotWebView;
 import com.example.ymwebview.YMBotPlugin;
 import com.google.gson.Gson;
-
-
 
 public class JavaScriptInterface {
     protected BotWebView parentActivity;
@@ -36,7 +35,27 @@ public class JavaScriptInterface {
     @JavascriptInterface
     public void  receiveMessage(String s) {
         BotEventsModel incomingEvent = new Gson().fromJson(s, BotEventsModel.class);
-        Log.d("Event from Bot", "receiveMessage: "+incomingEvent.toString());
+        Log.d("Event from Bot", "receiveMessage: "+incomingEvent.code);
+        if(!incomingEvent.code.equals("track-my-order")) // To remove after testing
+            parentActivity.finish();
         YMBotPlugin.getInstance().emitEvent(incomingEvent);
+
+//        new CountDownTimer(5000, 1000) {
+//            public void onFinish() {
+//                // When timer is finished
+//                // Execute your code here
+//                BotEventsModel incomingEvent = new Gson().fromJson(s, BotEventsModel.class);
+//                Log.d("Event from Bot", "receiveMessage: "+incomingEvent.code);
+//                if(!incomingEvent.code.equals("track-my-order")) // To remove after testing
+//                    parentActivity.finish();
+//                YMBotPlugin.getInstance().emitEvent(incomingEvent);
+//            }
+//
+//            public void onTick(long millisUntilFinished) {
+//                // millisUntilFinished    The amount of time until finished.
+//            }
+//        }.start();
+
     }
+
 }

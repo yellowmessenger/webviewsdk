@@ -47,6 +47,14 @@ public class ConfigDataModel{
         return false;
     }
 
+    public boolean emptyPayload() {
+        if (payload !=null) {
+            payload.clear();
+            return true;
+        }
+        return false;
+    }
+
     public String getPayloadByKey(String key) {
         return payload.get(key);
     }
