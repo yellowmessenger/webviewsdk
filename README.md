@@ -22,7 +22,7 @@ allprojects {
 dependencies {
     ...
     ...
-	   implementation 'com.github.yellowmessenger:webviewsdk:0.0.3'
+	   implementation 'com.github.yellowmessenger:webviewsdk:0.0.5'
 
 
 }
@@ -47,18 +47,12 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, Object> payloadData = new HashMap<>();
         //Important
         payloadData.put("platform","Android-App");
-        
-        payloadData.put("user-id","");
-        payloadData.put("access-token","");
-        payloadData.put("refresh-token","");
-        payloadData.put("mobile-number","");
-        payloadData.put("journey-slug","");
-        payloadData.put("user-state","");
+     
         //You can add other payload attributes in the same format.
         
         //Initialize the bot
         YMBotPlugin pluginYM =  YMBotPlugin.getInstance();
-        pluginYM.init(this ,configData, new BotEventListener() {
+        pluginYM.init(configData, new BotEventListener() {
             @Override
             public void onSuccess(BotEventsModel botEvent) {
                 Log.d("EventListener", "Event Recieved: "+ botEvent.getCode());
@@ -74,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //Send Payload Data
-        pluginYM.setPayload(payloadData);
+        pluginYM.setPayload(this, payloadData);
         
         //To start chabot call the pluginYm.startChatBot() method.
          FloatingActionButton fab = findViewById(R.id.fab);
