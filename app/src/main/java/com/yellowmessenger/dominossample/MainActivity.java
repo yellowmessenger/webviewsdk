@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     String configData = "{" +
             "\"botName\": \"Dominos\"," +
             "\"botID\": \"x1569558732722\"," +
-            "\"enableSpeech\": \"false\"," +
+            "\"enableSpeech\": \"true\"," +
             "\"enableHistory\": \"true\"" +
             "}";
     String configDataTest = "{" +
