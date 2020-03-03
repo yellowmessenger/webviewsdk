@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.ymwebview.models.ConfigDataModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -31,6 +32,9 @@ import java.util.Locale;
 public class BotWebView extends AppCompatActivity {
     private final String TAG = "YM WebView Plugin";
     WebviewOverlay fh;
+    AVLoadingIndicatorView avi;
+    RelativeLayout voiceArea;
+    TextView speechTranscription;
 
 
     @Override
@@ -47,6 +51,9 @@ public class BotWebView extends AppCompatActivity {
 
         if(Boolean.parseBoolean(enableSpeech)){
             FloatingActionButton micButton = findViewById(R.id.floatingActionButton);
+            voiceArea = findViewById(R.id.voiceArea);
+            speechTranscription = findViewById(R.id.speechTranscription);
+             avi = findViewById(R.id.speechAnimation);
             micButton.setVisibility(View.VISIBLE);
             micButton.setOnClickListener(view -> {
                 toggleBottomSheet();
@@ -72,6 +79,8 @@ public class BotWebView extends AppCompatActivity {
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
         intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 5);
+        intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
+
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,
                 appContext.getPackageName());
 
@@ -83,10 +92,6 @@ public class BotWebView extends AppCompatActivity {
     }
 
     public void toggleBottomSheet() {
-//        Toast.makeText(this, "opening Mic", Toast.LENGTH_SHORT).show();
-        fh.sendEvent("Bleh Bleh");
-        RelativeLayout voiceArea = findViewById(R.id.voiceArea);
-
         if(voiceArea.getVisibility() == View.INVISIBLE){
             voiceArea.setVisibility(View.VISIBLE);
 //            speechRecognition();
@@ -122,6 +127,7 @@ public class BotWebView extends AppCompatActivity {
 
         public void onBeginningOfSpeech() {
             Log.d(TAG, "onBeginningOfSpeech");
+            startAnim();
         }
 
         public void onRmsChanged(float rmsdB) {
@@ -135,6 +141,7 @@ public class BotWebView extends AppCompatActivity {
 
         public void onEndOfSpeech() {
             Log.d(TAG, "onEndofSpeech");
+            stopAnim();
         }
 
         public void onError(int error) {
@@ -146,12 +153,17 @@ public class BotWebView extends AppCompatActivity {
         public void onResults(Bundle results) {
             ArrayList<String> result = results
                     .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-            TextView textView = findViewById(R.id.speechTranscription);
-            textView.setText(result.get(0));
+
+            speechTranscription.setText(result.get(0));
+            fh.sendEvent(result.get(0));
+            toggleBottomSheet();
+            speechTranscription.setText("");
+
         }
 
         public void onPartialResults(Bundle partialResults) {
-            Log.d(TAG, "onPartialResults"+partialResults.toString());
+            Log.d(TAG, "onPartialResults"+ partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION).get(0));
+            speechTranscription.setText(partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION).get(0));
 
         }
 
@@ -159,6 +171,17 @@ public class BotWebView extends AppCompatActivity {
             Log.d(TAG, "onEvent " + eventType);
         }
     }
+
+    void startAnim(){
+        avi.show();
+        // or avi.smoothToShow();
+    }
+
+    void stopAnim(){
+        avi.hide();
+        // or avi.smoothToHide();
+    }
+
 
 
 }
