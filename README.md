@@ -22,7 +22,7 @@ allprojects {
 dependencies {
     ...
     ...
-	   implementation 'com.github.yellowmessenger:webviewsdk:0.0.5'
+	   implementation 'com.github.yellowmessenger:webviewsdk:0.0.6'
 
 
 }
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         String configData = "{" +
             "\"botName\": \"Bot-Name\"," +
             "\"botID\": \"<REPLACE-WITH-BOT-ID>\"," +
-	    "\"enableHistory\": \"<true/false>\"" +
+	        "\"enableHistory\": \"<true/false>\"" +
             "}";
         //Payload attributes
         HashMap<String, Object> payloadData = new HashMap<>();
