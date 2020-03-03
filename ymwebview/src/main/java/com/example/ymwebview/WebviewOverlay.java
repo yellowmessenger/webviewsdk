@@ -67,12 +67,14 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
     public View preLoadWebView() {
         final Context context = ctx;
         String botId = ConfigDataModel.getInstance().getConfig("botID");
+        String enableHistory = ConfigDataModel.getInstance().getConfig("enableHistory");
         Map payload = ConfigDataModel.getInstance().getPayload();
         String payloadJSON = new Gson().toJson(payload);
         myWebView = new AdvancedWebView(context);
         myWebView.setListener(getActivity(), this);
-        final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=" + botId + "&ym.payload=" + payloadJSON;
-//        final String botUrl = "https://priyankupadhyay.github.io/pages/dominos/mobile.html?botId=" + botId + "&ym.payload=" + payloadJSON;
+        final String botUrl = "https://priyankupadhyay.github.io/pages/dominos/mobile.html?botId=" + botId + "&enableHistory="+ enableHistory + "&ym.payload=" + payloadJSON;
+//        final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=" + botId + "&enableHistory="+ enableHistory + "&ym.payload=" + payloadJSON;
+//        final String botUrl = "http://62ec045b.ngrok.io/index.html?botId=" + botId + "&enableHistory="+ enableHistory + "&ym.payload=" + payloadJSON;
         Log.d(TAG, "onCreate: " + botUrl);
         myWebView.loadUrl(botUrl);
         myWebView.getSettings().setSupportMultipleWindows(true);
@@ -132,11 +134,11 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         myWebView.setVisibility(View.VISIBLE);
     }
 
-
     @Override
     public void onPageError(int errorCode, String description, String failingUrl) {
-        //progressDialog.dismiss();
-        Toast.makeText(getActivity(), "onPageError(errorCode = "+errorCode+",  description = "+description+",  failingUrl = "+failingUrl+")", Toast.LENGTH_SHORT).show();
+        progressDialog.dismiss();
+        Log.e("Page Error", "onPageError(errorCode = "+errorCode+",  description = "+description+",  failingUrl = "+failingUrl+")");
+//        Toast.makeText(getActivity(), "onPageError(errorCode = "+errorCode+",  description = "+description+",  failingUrl = "+failingUrl+")", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -145,7 +147,6 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
 
     @Override
     public void onExternalPageRequest(String url) {
-        //Toast.makeText(BotWebView.this, "onExternalPageRequest(url = "+url+")", Toast.LENGTH_SHORT).show();
     }
 
 
