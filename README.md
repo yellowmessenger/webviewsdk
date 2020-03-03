@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
         //Configuration data
         String configData = "{" +
             "\"botName\": \"Bot-Name\"," +
-            "\"botID\": \"<REPLACE-WITH-BOT-ID>\"" +
+            "\"botID\": \"<REPLACE-WITH-BOT-ID>\"," +
+	    "\"enableHistory\": \"<true/false>\"" +
             "}";
         //Payload attributes
         HashMap<String, Object> payloadData = new HashMap<>();
