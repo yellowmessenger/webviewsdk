@@ -5,9 +5,6 @@
     <color name="colorAccent">#E31837</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorDark">#2C2B2B</color>
-    <color name="textColor">#565867</color>
-    <color name="textBackground">#f9f9f9</color>
-    <color name="borderColor">#f1f1f1</color>
 
     <color name="black_overlay">#66000000</color>
 </resources>

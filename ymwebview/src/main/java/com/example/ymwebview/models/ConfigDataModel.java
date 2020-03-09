@@ -36,10 +36,7 @@ public class ConfigDataModel{
     }
 
     public String getConfig(String key) {
-        if(config.get(key) != null){
-            return  config.get(key);
-        }
-        else return "";
+        return config.get(key);
     }
 
     public boolean setPayload(Map botPayload) {

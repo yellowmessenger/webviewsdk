@@ -43,19 +43,19 @@ public class YMBotPlugin {
                 throw new RuntimeException("Mandatory arguments not present");
             }
         } else {
-//             throw new RuntimeException("Cannot initialize " + this.getClass().getName() + " multiple times");
+            throw new RuntimeException("Cannot initialize " + this.getClass().getName() + " multiple times");
         }
     }
-    public  void startChatBot(){
+    public void startChatBot(Context context){
+        myContext = context;
+        _intent = new Intent(myContext, BotWebView.class);
         myContext.startActivity(_intent);
     }
 
 
-    public void setPayload(Context context, Map botPayload){
-        myContext = context;
+    public void setPayload(Map botPayload){
         ConfigDataModel.getInstance().emptyPayload();
         ConfigDataModel.getInstance().setPayload(botPayload);
-        _intent = new Intent(myContext, BotWebView.class);
     }
 
     public void emitEvent(BotEventsModel event){

@@ -20,40 +20,26 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="9dp"
-        android:layout_marginRight="19dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginRight="9dp"
+        android:layout_marginBottom="21dp"
         android:background="@android:drawable/ic_btn_speak_now"
         android:clickable="true"
         android:tint="@color/design_default_color_surface"
         android:visibility="invisible"
-        app:fabSize="mini"
         app:srcCompat="@android:drawable/ic_btn_speak_now" />
-
-<!--    <View-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="1dp"-->
-<!--        android:layout_alignParentStart="true"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginStart="0dp"-->
-<!--        android:layout_marginTop="629dp"-->
-<!--        android:layout_marginEnd="-2dp"-->
-<!--        android:background="@color/colorAccent" />-->
 
     <RelativeLayout
         android:id="@+id/voiceArea"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="300dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginBottom="0dp"
-        android:background="@color/textBackground"
+        android:background="@color/cardview_dark_background"
         android:visibility="invisible">
-
 
         <TextView
             android:id="@+id/speechTranscription"
@@ -69,27 +55,9 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:text="Start speaking ..."
-            android:textColor="@color/textColor"
+            android:text="Start Speaking..."
+            android:textColor="@color/colorWhite"
             android:textSize="18sp" />
-
-        <com.wang.avi.AVLoadingIndicatorView
-            android:id="@+id/speechAnimation"
-            android:layout_width="wrap_content"
-            android:layout_height="73dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="334dp"
-            android:layout_marginLeft="334dp"
-            android:layout_marginEnd="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_marginBottom="8dp"
-            app:indicatorColor="@color/colorAccent"
-            app:indicatorName="BallScaleMultipleIndicator" />
-
     </RelativeLayout>
 
 </RelativeLayout>

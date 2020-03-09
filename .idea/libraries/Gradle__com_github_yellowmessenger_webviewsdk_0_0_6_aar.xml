@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.yellowmessenger:webviewsdk:0.0.6@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/03441fec37bf09c329639fd134668814/webviewsdk-0.0.6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/03441fec37bf09c329639fd134668814/webviewsdk-0.0.6/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.yellowmessenger/webviewsdk/0.0.6/9e0c4e150fbb1c095accb1f7c53b46e3e1a3b5c3/webviewsdk-0.0.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
