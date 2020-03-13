@@ -12,6 +12,8 @@ import android.speech.SpeechRecognizer;
 import android.util.Log;
 
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +54,11 @@ public class BotWebView extends AppCompatActivity {
                 toggleBottomSheet();
             });
         }
+        ImageButton backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(view->{
+            this.finish();
+        });
+
     }
 
     private void speechRecognition() {

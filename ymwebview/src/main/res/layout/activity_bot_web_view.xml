@@ -60,4 +60,15 @@
             android:textSize="18sp" />
     </RelativeLayout>
 
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="23dp"
+        android:layout_marginRight="18dp"
+        android:background="@color/transparent"
+        app:srcCompat="@drawable/ic_back_button" />
+
 </RelativeLayout>
