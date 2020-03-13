@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
         payloadData.put("Platform", "Android-App");
         pluginYM.setPayload(payloadData);
-
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
            pluginYM.startChatBot(this);
@@ -64,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     @Override
