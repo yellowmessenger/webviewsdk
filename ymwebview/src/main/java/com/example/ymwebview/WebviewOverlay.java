@@ -21,8 +21,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import android.widget.Toast;
-
 import com.example.ymwebview.models.ConfigDataModel;
 import com.example.ymwebview.models.JavaScriptInterface;
 import com.google.gson.Gson;
@@ -33,10 +31,6 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
     private final String TAG = "YM WebView Plugin";
     private AdvancedWebView myWebView;
     ProgressDialog progressDialog;
-
-//    public WebviewOverlay() {
-//    }
-
 
     @Nullable
     @Override
@@ -65,10 +59,11 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         String botId = ConfigDataModel.getInstance().getConfig("botID");
         Map payload = ConfigDataModel.getInstance().getPayload();
         String payloadJSON = new Gson().toJson(payload);
+        String enableHistory = ConfigDataModel.getInstance().getConfig("enableHistory");
         myWebView = new AdvancedWebView(context);
         myWebView.setListener(getActivity(), this);
-        final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=" + botId + "&ym.payload=" + payloadJSON;
-//        final String botUrl = "https://priyankupadhyay.github.io/pages/dominos/mobile.html?botId=" + botId + "&ym.payload=" + payloadJSON;
+        final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=" + botId + "&enableHistory=" + enableHistory + "&ym.payload=" + payloadJSON;
+//
         Log.d(TAG, "onCreate: " + botUrl);
         myWebView.loadUrl(botUrl);
         myWebView.getSettings().setSupportMultipleWindows(true);
@@ -114,8 +109,8 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
 //        }
 
         public void sendEvent(String s){
-        Log.d("Priyank", s);
-        myWebView.loadUrl("javascript:sendEvent('"+s+"');");
+            Log.d("Sending Event: ", s);
+            myWebView.loadUrl("javascript:sendEvent('"+s+"');");
     }
     @Override
     public void onPageStarted(String url, Bitmap favicon) {
@@ -131,8 +126,8 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
 
     @Override
     public void onPageError(int errorCode, String description, String failingUrl) {
-        //progressDialog.dismiss();
-        Toast.makeText(getActivity(), "onPageError(errorCode = "+errorCode+",  description = "+description+",  failingUrl = "+failingUrl+")", Toast.LENGTH_SHORT).show();
+        progressDialog.dismiss();
+        Log.e("WebView Error", "onPageError(errorCode = "+errorCode+",  description = "+description+",  failingUrl = "+failingUrl+")");
     }
 
     @Override

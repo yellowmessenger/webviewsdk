@@ -10,18 +10,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     String configData = "{" +
             "\"botName\": \"SomeBotName\"," +
-            "\"botID\": \"x1569558732722\"" +
+            "\"botID\": \"x1569558732722\"," +
+            "\"enableHistory\": \"true\"" +
             "}";
 
 
