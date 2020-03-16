@@ -32,15 +32,11 @@ import im.delight.android.webview.AdvancedWebView;
 public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener {
     private final String TAG = "YM WebView Plugin";
     private AdvancedWebView myWebView;
-    Context ctx;
     ProgressDialog progressDialog;
 
-    WebviewOverlay() {
-    }
+//    public WebviewOverlay() {
+//    }
 
-    WebviewOverlay(Context ctx) {
-        this.ctx = ctx;
-    }
 
     @Nullable
     @Override
@@ -65,7 +61,7 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
     }
 
     public View preLoadWebView() {
-        final Context context = ctx;
+        final Context context = getActivity();
         String botId = ConfigDataModel.getInstance().getConfig("botID");
         Map payload = ConfigDataModel.getInstance().getPayload();
         String payloadJSON = new Gson().toJson(payload);
@@ -85,7 +81,7 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         myWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
-                AdvancedWebView newWebView = new AdvancedWebView(ctx);
+                AdvancedWebView newWebView = new AdvancedWebView(context);
                 //setContentView(newWebView);
                 Log.d("qwerty", resultMsg.toString());
                 WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
