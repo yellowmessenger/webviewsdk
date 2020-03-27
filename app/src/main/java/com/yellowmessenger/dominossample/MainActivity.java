@@ -10,6 +10,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -33,22 +34,28 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         YMBotPlugin pluginYM =  YMBotPlugin.getInstance();
-        pluginYM.init(configData, new BotEventListener() {
+        try {
+            pluginYM.init(configData, new BotEventListener() {
 
-            @Override
-            public void onSuccess(BotEventsModel botEvent) {
+                @Override
+                public void onSuccess(BotEventsModel botEvent) {
 
-                switch (botEvent.getCode()){
-                    case "even-name-1" : break;
-                    case "even-name-2" : break;
-                    case "even-name-3" : break;
+                    switch (botEvent.getCode()){
+                        case "even-name-1" : break;
+                        case "even-name-2" : break;
+                        case "even-name-3" : break;
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(String error) {
-            }
-        });
+                @Override
+                public void onFailure(String error) {
+                }
+            });
+        }
+        catch (RuntimeException e){
+            Log.w("Plugin Exception", "onCreate: "+e.getMessage());
+        }
+
 
         payloadData.put("Platform", "Android-App");
         pluginYM.setPayload(payloadData);
