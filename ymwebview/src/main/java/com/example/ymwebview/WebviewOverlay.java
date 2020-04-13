@@ -24,6 +24,7 @@ import android.webkit.WebViewClient;
 import com.example.ymwebview.models.ConfigDataModel;
 import com.example.ymwebview.models.JavaScriptInterface;
 import com.google.gson.Gson;
+import java.net.URLEncoder;
 import java.util.Map;
 import im.delight.android.webview.AdvancedWebView;
 
@@ -58,7 +59,7 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         final Context context = getActivity();
         String botId = ConfigDataModel.getInstance().getConfig("botID");
         Map payload = ConfigDataModel.getInstance().getPayload();
-        String payloadJSON = new Gson().toJson(payload);
+        String payloadJSON = URLEncoder.encode(new Gson().toJson(payload));
         String enableHistory = ConfigDataModel.getInstance().getConfig("enableHistory");
         myWebView = new AdvancedWebView(context);
         myWebView.setListener(getActivity(), this);
