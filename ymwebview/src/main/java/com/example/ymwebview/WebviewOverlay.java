@@ -37,7 +37,7 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
-        progressDialog = new ProgressDialog(getActivity());
+        progressDialog = new ProgressDialog(getActivity().getApplicationContext());
         progressDialog.setTitle("Please wait.");
         progressDialog.setMessage("The bot is initializing...");
         progressDialog.setCanceledOnTouchOutside(false);
@@ -115,19 +115,34 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
     }
     @Override
     public void onPageStarted(String url, Bitmap favicon) {
-        progressDialog.show();
+        try {
+           progressDialog.show();
+       }
+       catch (Exception e){
+           Log.e(TAG, "YmPlugin: Bot loading dialog ", e );
+       }
     }
 
     @Override
     public void onPageFinished(String url) {
-        progressDialog.dismiss();
+        try {
+            progressDialog.dismiss();
+        }
+        catch (Exception e){
+            Log.e(TAG, "YmPlugin: Bot loading dialog dismiss ", e );
+        }
         myWebView.setVisibility(View.VISIBLE);
     }
 
 
     @Override
     public void onPageError(int errorCode, String description, String failingUrl) {
-        progressDialog.dismiss();
+        try {
+            progressDialog.dismiss();
+        }
+        catch (Exception e){
+            Log.e(TAG, "YmPlugin: Bot loading dialog dismiss ", e );
+        }
         Log.e("WebView Error", "onPageError(errorCode = "+errorCode+",  description = "+description+",  failingUrl = "+failingUrl+")");
     }
 
