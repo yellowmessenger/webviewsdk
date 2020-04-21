@@ -41,6 +41,12 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         progressDialog.setTitle("Please wait.");
         progressDialog.setMessage("The bot is initializing...");
         progressDialog.setCanceledOnTouchOutside(false);
+         try {
+           progressDialog.show();
+       }
+       catch (Exception e){
+           Log.e(TAG, "YmPlugin: Bot loading dialog ", e );
+       }
         myWebView = (AdvancedWebView) preLoadWebView();
         return myWebView;
     }
@@ -115,12 +121,6 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
     }
     @Override
     public void onPageStarted(String url, Bitmap favicon) {
-        try {
-           progressDialog.show();
-       }
-       catch (Exception e){
-           Log.e(TAG, "YmPlugin: Bot loading dialog ", e );
-       }
     }
 
     @Override
