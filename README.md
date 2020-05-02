@@ -87,5 +87,12 @@ public class MainActivity extends AppCompatActivity {
 
 }
 ```
+## Important
+If facing porblem in release build, add the following configuration in the app's proguard-rules.pro file.
+```java
+-keep public class com.example.ymwebview.** {
+   *;
+}
+```
 
 
