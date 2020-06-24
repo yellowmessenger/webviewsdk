@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.ymwebview.models.BotEventsModel;
 import com.example.ymwebview.models.ConfigDataModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -56,6 +57,7 @@ public class BotWebView extends AppCompatActivity {
 
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(view->{
+            YMBotPlugin.getInstance().emitEvent(new BotEventsModel("bot-closed",""));
             this.finish();
         });
     }
