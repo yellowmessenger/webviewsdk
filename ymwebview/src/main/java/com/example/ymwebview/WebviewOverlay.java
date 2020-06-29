@@ -1,5 +1,6 @@
 package com.example.ymwebview;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,9 +18,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Message;
 import android.util.Log;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.example.ymwebview.models.ConfigDataModel;
 import com.example.ymwebview.models.JavaScriptInterface;
@@ -32,6 +35,11 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
     private final String TAG = "YM WebView Plugin";
     private AdvancedWebView myWebView;
     ProgressDialog progressDialog;
+
+    ProgressBar progressBar;
+
+    private ValueCallback<Uri> mUploadMessage;
+    private final static int FILECHOOSER_RESULTCODE=1;
 
     @Nullable
     @Override
@@ -49,6 +57,26 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
        }
         myWebView = (AdvancedWebView) preLoadWebView();
         return myWebView;
+    }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode,
+//                                    Intent intent) {
+//        if(requestCode==FILECHOOSER_RESULTCODE)
+//        {
+//            if (null == mUploadMessage) return;
+//            Uri result = intent == null || resultCode != Activity.RESULT_OK ? null
+//                    : intent.getData();
+//            mUploadMessage.onReceiveValue(result);
+//            mUploadMessage = null;
+//        }
+//    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        myWebView.onActivityResult(requestCode, resultCode, intent);
+        // ...
     }
 
     @Override
@@ -75,12 +103,50 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         myWebView.loadUrl(botUrl);
         myWebView.getSettings().setSupportMultipleWindows(true);
         myWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        myWebView.getSettings().setAllowFileAccess(true);
         myWebView.getSettings().setGeolocationDatabasePath(context.getFilesDir().getPath());
         myWebView.addJavascriptInterface(new JavaScriptInterface((BotWebView) getActivity(), myWebView), "YMHandler");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             WebView.setWebContentsDebuggingEnabled(true);
+
         }
         myWebView.setWebChromeClient(new WebChromeClient() {
+
+
+            public void openFileChooser(ValueCallback<Uri> uploadMsg) {
+
+                mUploadMessage = uploadMsg;
+                Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+                i.addCategory(Intent.CATEGORY_OPENABLE);
+                i.setType("image/*");
+                WebviewOverlay.this.startActivityForResult(Intent.createChooser(i,"File Chooser"), FILECHOOSER_RESULTCODE);
+
+            }
+
+            // For Android 3.0+
+            public void openFileChooser( ValueCallback uploadMsg, String acceptType ) {
+                mUploadMessage = uploadMsg;
+                Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+                i.addCategory(Intent.CATEGORY_OPENABLE);
+                i.setType("*/*");
+                WebviewOverlay.this.startActivityForResult(
+                        Intent.createChooser(i, "File Browser"),
+                        FILECHOOSER_RESULTCODE);
+            }
+
+            //For Android 4.1
+            public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture){
+                mUploadMessage = uploadMsg;
+                Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+                i.addCategory(Intent.CATEGORY_OPENABLE);
+                i.setType("image/*");
+                WebviewOverlay.this.startActivityForResult( Intent.createChooser( i, "File Chooser" ), WebviewOverlay.FILECHOOSER_RESULTCODE );
+
+            }
+
+
+
+
             @Override
             public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
                 AdvancedWebView newWebView = new AdvancedWebView(context);
@@ -157,3 +223,4 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
 
 
 }
+

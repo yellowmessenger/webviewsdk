@@ -17,12 +17,16 @@ import android.view.MenuItem;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
+//    String configData = "{" +
+//            "\"botName\": \"SomeBotName\"," +
+//            "\"botID\": \"x1591608878986\"," +
+//            "\"enableSpeech\": \"false\"" +
+//            "}";
     String configData = "{" +
             "\"botName\": \"SomeBotName\"," +
-            "\"botID\": \"x1569558732722\"," +
-            "\"enableHistory\": \"true\"" +
+            "\"botID\": \"x1562765523121\"," +
+            "\"enableSpeech\": \"true\"" +
             "}";
-
 
     HashMap<String, Object> payloadData = new HashMap<>();
 
