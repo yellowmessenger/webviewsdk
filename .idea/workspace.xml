@@ -7,16 +7,10 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a19e53d-8366-4472-bba0-dd3846e3a4c2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_yellowmessenger_webviewsdk__SNAPSHOT_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_skyfishjy_ripplebackground_library_1_0_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ymwebview/src/main/res/drawable-anydpi/ic_mic_button.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ymwebview/src/main/res/drawable-hdpi/ic_mic_button.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ymwebview/src/main/res/drawable-mdpi/ic_mic_button.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ymwebview/src/main/res/drawable-xhdpi/ic_mic_button.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ymwebview/src/main/res/drawable-xxhdpi/ic_mic_button.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -27,25 +21,7 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/yellowmessenger/dominossample/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/yellowmessenger/dominossample/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/constraintlayout/group-index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/androidx/constraintlayout/group-index.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/master-index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/master-index.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ymwebview/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/ymwebview/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/BotWebView.java" beforeDir="false" afterPath="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/BotWebView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/WebviewOverlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/WebviewOverlay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/models/JavaScriptInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/models/JavaScriptInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ymwebview/src/main/res/layout/activity_bot_web_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ymwebview/src/main/res/layout/activity_bot_web_view.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ymwebview/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ymwebview/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ymwebview/ymwebview.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ymwebview/ymwebview.iml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -103,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/BotWebView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="42" column="51" lean-forward="true" selection-start-line="42" selection-start-column="51" selection-end-line="42" selection-end-column="51" />
+            <state relative-caret-position="492">
+              <caret line="107" column="5" selection-start-line="107" selection-start-column="5" selection-end-line="107" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#startMic#0;class#BotWebView#0" />
@@ -152,15 +128,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/WebviewOverlay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-76">
-              <caret line="194" column="37" selection-start-line="194" selection-start-column="37" selection-end-line="194" selection-end-column="37" />
+            <state relative-caret-position="411">
+              <caret line="68" column="49" selection-start-line="68" selection-start-column="49" selection-end-line="68" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2057#2058#0" expanded="true" />
                 <element signature="e#2081#2082#0" expanded="true" />
+                <element signature="e#6378#6790#0" expanded="true" />
+                <element signature="e#6789#6790#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -219,8 +197,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/yellowmessenger/dominossample/MainActivity.java" />
-        <option value="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/WebviewOverlay.java" />
         <option value="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/BotWebView.java" />
+        <option value="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/WebviewOverlay.java" />
       </list>
     </option>
   </component>
@@ -417,7 +395,7 @@
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.32871288" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Android Profiler" order="3" />
-      <window_info active="true" anchor="bottom" id="Debug" order="4" sideWeight="0.49893504" visible="true" weight="0.55544555" />
+      <window_info active="true" anchor="bottom" id="Debug" order="4" sideWeight="0.49893504" visible="true" weight="0.4920792" />
       <window_info anchor="bottom" id="Terminal" order="5" weight="0.32970297" />
       <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.50106496" side_tool="true" weight="0.46435642" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32959184" />
@@ -449,18 +427,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/BotWebView.java</url>
-          <line>101</line>
-          <properties class="com.example.ymwebview.BotWebView" method="speechRecognition" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/ymwebview/src/main/res/layout/content_test.xml" />
@@ -685,22 +651,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/WebviewOverlay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-76">
-          <caret line="194" column="37" selection-start-line="194" selection-start-column="37" selection-end-line="194" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2057#2058#0" expanded="true" />
-            <element signature="e#2081#2082#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/BotWebView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="42" column="51" lean-forward="true" selection-start-line="42" selection-start-column="51" selection-end-line="42" selection-end-column="51" />
+        <state relative-caret-position="492">
+          <caret line="107" column="5" selection-start-line="107" selection-start-column="5" selection-end-line="107" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#startMic#0;class#BotWebView#0" />
@@ -713,6 +667,20 @@
             <element signature="class#CustomRecognitionListener#0;class#BotWebView#0" />
             <element signature="e#8016#8017#0" expanded="true" />
             <element signature="e#8067#8068#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/WebviewOverlay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="68" column="49" selection-start-line="68" selection-start-column="49" selection-end-line="68" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2057#2058#0" expanded="true" />
+            <element signature="e#2081#2082#0" expanded="true" />
+            <element signature="e#6378#6790#0" expanded="true" />
+            <element signature="e#6789#6790#0" expanded="true" />
           </folding>
         </state>
       </provider>

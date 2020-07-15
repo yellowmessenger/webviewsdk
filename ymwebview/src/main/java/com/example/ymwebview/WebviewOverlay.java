@@ -105,13 +105,15 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         // final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=" + botId + "&enableHistory=" + false + "&ym.payload=" + payloadJSON;
 //
         Log.d(TAG, "onCreate: " + botUrl);
-        
         myWebView.getSettings().setSupportMultipleWindows(true);
         myWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         myWebView.getSettings().setAllowFileAccess(true);
         myWebView.getSettings().setGeolocationDatabasePath(context.getFilesDir().getPath());
         myWebView.addJavascriptInterface(new JavaScriptInterface((BotWebView) getActivity(), myWebView), "YMHandler");
-        
+
+        if (Build.VERSION.SDK_INT > 17) {
+            myWebView.getSettings().setMediaPlaybackRequiresUserGesture(false);
+        }
         myWebView.setWebChromeClient(new WebChromeClient() {
 
 
