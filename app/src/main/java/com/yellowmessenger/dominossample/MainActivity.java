@@ -13,20 +13,33 @@ import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-//    String configData = "{" +
-//            "\"botName\": \"SomeBotName\"," +
-//            "\"botID\": \"x1591608878986\"," +
-//            "\"enableSpeech\": \"false\"" +
-//            "}";
+
+//TATA Cap
     String configData = "{" +
             "\"botName\": \"SomeBotName\"," +
-            "\"botID\": \"x1562765523121\"," +
+            "\"botID\": \"x1593069769065\"," +
             "\"enableSpeech\": \"true\"" +
             "}";
+
+// IDK
+//    String configData = "{" +
+//            "\"botName\": \"SomeBotName\"," +
+//            "\"botID\": \"x1562765523121\"," +
+//            "\"enableSpeech\": \"false\"" +
+//            "}";
+
+//MPL
+//        String configData = "{" +
+//            "\"botName\": \"SomeBotName\"," +
+//            "\"botID\": \"x1592302653259\"," +
+//            "\"enableSpeech\": \"false\"" +
+//            "}";
 
     HashMap<String, Object> payloadData = new HashMap<>();
 
@@ -61,8 +74,28 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        Switch languageSwitch = findViewById(R.id.toggleLanguage);
+
+        languageSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    payloadData.put("Platform", "Android-App");
+                    payloadData.put("defaultLanguage", "hi");
+                    pluginYM.setPayload(payloadData);
+                } else {
+                    payloadData.put("Platform", "Android-App");
+                    payloadData.put("defaultLanguage", "en");
+                    pluginYM.setPayload(payloadData);
+                }
+            }
+        });
+
         payloadData.put("Platform", "Android-App");
         pluginYM.setPayload(payloadData);
+
+
+
+
 
 
         FloatingActionButton fab = findViewById(R.id.fab);

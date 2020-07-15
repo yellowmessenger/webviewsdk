@@ -35,7 +35,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/content/ic_clear_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/av/ic_mic_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -58,9 +58,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="imageAsset" value="$PROJECT_DIR$/../../../ic_back_button.png" />
-                                      <entry key="outputName" value="ic_back_button" />
+                                      <entry key="outputName" value="ic_mic_button" />
                                       <entry key="theme" value="HOLO_DARK" />
                                       <entry key="themeColor" value="ffffff" />
                                     </map>

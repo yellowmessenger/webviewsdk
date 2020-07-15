@@ -36,8 +36,12 @@ public class JavaScriptInterface {
     public void  receiveMessage(String s) {
         BotEventsModel incomingEvent = new Gson().fromJson(s, BotEventsModel.class);
         Log.d("Event from Bot", "receiveMessage: "+incomingEvent.code);
-        if(!incomingEvent.code.equals("Message Received"))
+        if(!incomingEvent.code.equals("Message Received") && !incomingEvent.code.equals("start-mic"))
             parentActivity.finish();
+        else {
+            if(incomingEvent.code.equals("start-mic"))
+            parentActivity.runOnUiThread(() -> parentActivity.startMic(Long.parseLong(incomingEvent.data) * 1000));
+        }
         YMBotPlugin.getInstance().emitEvent(incomingEvent);
     }
 

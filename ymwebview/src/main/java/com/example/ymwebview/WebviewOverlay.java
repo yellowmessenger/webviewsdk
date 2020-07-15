@@ -59,6 +59,10 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         return myWebView;
     }
 
+    public void closeBot(){
+        myWebView.loadUrl("");
+    }
+
 //    @Override
 //    public void onActivityResult(int requestCode, int resultCode,
 //                                    Intent intent) {
@@ -97,18 +101,18 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         String enableHistory = ConfigDataModel.getInstance().getConfig("enableHistory");
         myWebView = new AdvancedWebView(context);
         myWebView.setListener(getActivity(), this);
-        final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=" + botId + "&enableHistory=" + enableHistory + "&ym.payload=" + payloadJSON;
+//        final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=" + botId + "&enableHistory=" + enableHistory + "&ym.payload=" + payloadJSON;
+        final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=" + botId + "&enableHistory=" + false + "&ym.payload=" + payloadJSON;
 //
         Log.d(TAG, "onCreate: " + botUrl);
-        myWebView.loadUrl(botUrl);
         myWebView.getSettings().setSupportMultipleWindows(true);
         myWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         myWebView.getSettings().setAllowFileAccess(true);
         myWebView.getSettings().setGeolocationDatabasePath(context.getFilesDir().getPath());
         myWebView.addJavascriptInterface(new JavaScriptInterface((BotWebView) getActivity(), myWebView), "YMHandler");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            WebView.setWebContentsDebuggingEnabled(true);
 
+        if (Build.VERSION.SDK_INT > 17) {
+            myWebView.getSettings().setMediaPlaybackRequiresUserGesture(false);
         }
         myWebView.setWebChromeClient(new WebChromeClient() {
 
@@ -168,6 +172,8 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
                 return true;
             }
         });
+        myWebView.loadUrl(botUrl);
+
         return myWebView;
     }
 
@@ -183,7 +189,7 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
 
         public void sendEvent(String s){
             Log.d("Sending Event: ", s);
-            myWebView.loadUrl("javascript:sendEvent('"+s+"');");
+            myWebView.loadUrl("javascript:sendEvent(\""+s+"\");");
     }
     @Override
     public void onPageStarted(String url, Bitmap favicon) {

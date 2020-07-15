@@ -150,7 +150,5 @@
     <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout:1.1.3@aar" level="project" />
     <orderEntry type="module" module-name="ymwebview" />
     <orderEntry type="module" module-name="ymwebview" />
-    <orderEntry type="module" module-name="ymwebview" />
-    <orderEntry type="module" module-name="ymwebview" />
   </component>
 </module>
