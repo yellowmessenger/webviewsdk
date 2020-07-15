@@ -96,8 +96,7 @@
 
     </com.skyfishjy.library.RippleBackground>
 
-
-    <ImageButton
+     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="32dp"
         android:layout_height="32dp"
