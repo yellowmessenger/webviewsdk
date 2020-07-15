@@ -33,6 +33,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.ymwebview.models.BotEventsModel;
 import com.example.ymwebview.models.ConfigDataModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.skyfishjy.library.RippleBackground;
 
 import java.util.ArrayList;
@@ -238,7 +239,11 @@ public class BotWebView extends AppCompatActivity {
 
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         public void onError(int error) {
-            closeVoiceArea();
+//            closeVoiceArea();
+//            View parentLayout = findViewById(android.R.id.content);
+//            Snackbar snackbar = Snackbar
+//                    .make(parentLayout, "error " + error, Snackbar.LENGTH_LONG);
+//            snackbar.show();
             Log.e(TAG, "error " + error);
 
         }
