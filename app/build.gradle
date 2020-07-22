@@ -50,5 +50,6 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation project(path: ':ymwebview')
 
+//    implementation 'com.github.yellowmessenger:webviewsdk:0.1.8'
 
 }

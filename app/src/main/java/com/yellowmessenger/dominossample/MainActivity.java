@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(BotEventsModel botEvent) {
 
                     switch (botEvent.getCode()){
-                        case "even-name-1" : break;
+                        case "even-name-1" :
+                            Log.d("Bot event", botEvent.getData()); break;
                         case "even-name-2" : break;
                         case "even-name-3" : break;
                     }

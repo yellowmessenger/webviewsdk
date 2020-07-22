@@ -62,6 +62,8 @@ public class BotWebView extends AppCompatActivity {
         }
     }
 
+
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,22 +75,19 @@ public class BotWebView extends AppCompatActivity {
                     return insets.consumeSystemWindowInsets();
                 });
         setContentView(R.layout.activity_bot_web_view);
+
         fh=new WebviewOverlay();
         FragmentManager fragManager=getSupportFragmentManager();
         fragManager.beginTransaction()
                 .add(R.id.container,fh)
                 .commit();
         String enableSpeech = ConfigDataModel.getInstance().getConfig("enableSpeech");
-        Log.d(TAG, "enableSpeech : "+ enableSpeech);
-
         if(Boolean.parseBoolean(enableSpeech)){
             FloatingActionButton micButton = findViewById(R.id.floatingActionButton);
             micButton.setVisibility(View.VISIBLE);
             micButton.setOnClickListener(view -> {
                 toggleBottomSheet();
             });
-
-
         }
 
         ImageButton backButton = findViewById(R.id.backButton);
@@ -97,6 +96,10 @@ public class BotWebView extends AppCompatActivity {
             fh.closeBot();
             this.finish();
         });
+
+
+
+
     }
 
 
