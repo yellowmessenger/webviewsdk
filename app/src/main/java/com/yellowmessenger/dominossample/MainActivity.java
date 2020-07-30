@@ -21,9 +21,9 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
 //TATA Cap
+    String botId = "x1593069769065";
     String configData = "{" +
-            "\"botName\": \"SomeBotName\"," +
-            "\"botID\": \"x1593069769065\"," +
+            "\"botID\": \""+botId+"\"," +
             "\"enableSpeech\": \"true\"" +
             "}";
 

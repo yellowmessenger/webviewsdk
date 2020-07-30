@@ -102,6 +102,12 @@ public class BotWebView extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        fh.closeBot();
+        this.finish();
+    }
 
     private void speechRecognition() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -185,6 +191,7 @@ public class BotWebView extends AppCompatActivity {
             rippleBackground.stopRippleAnimation();
             micButton.setImageDrawable(getDrawable(R.drawable.ic_mic_button));
             sr.stopListening();
+            sr.destroy();
     }
 
     @Override
@@ -242,12 +249,11 @@ public class BotWebView extends AppCompatActivity {
 
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         public void onError(int error) {
-//            closeVoiceArea();
-//            View parentLayout = findViewById(android.R.id.content);
-//            Snackbar snackbar = Snackbar
-//                    .make(parentLayout, "error " + error, Snackbar.LENGTH_LONG);
-//            snackbar.show();
-            Log.e(TAG, "error " + error);
+            closeVoiceArea();
+            View parentLayout = findViewById(android.R.id.content);
+            Snackbar snackbar = Snackbar
+                    .make(parentLayout, "An error occurred during speech recognition. Press mic button to start again.", Snackbar.LENGTH_LONG);
+            snackbar.show() ;
 
         }
 
