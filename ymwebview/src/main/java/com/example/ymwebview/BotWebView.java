@@ -252,7 +252,7 @@ public class BotWebView extends AppCompatActivity {
             closeVoiceArea();
             View parentLayout = findViewById(android.R.id.content);
             Snackbar snackbar = Snackbar
-                    .make(parentLayout, "An error occurred during speech recognition. Press mic button to start again.", Snackbar.LENGTH_LONG);
+                    .make(parentLayout, "We've encountered an error. Please press Mic to continue with voice input.", Snackbar.LENGTH_LONG);
             snackbar.show() ;
 
         }
