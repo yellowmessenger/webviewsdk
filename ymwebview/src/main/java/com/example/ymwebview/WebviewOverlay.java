@@ -2,6 +2,7 @@ package com.example.ymwebview;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.example.ymwebview.models.ConfigDataModel;
@@ -101,8 +103,9 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         String enableHistory = ConfigDataModel.getInstance().getConfig("enableHistory");
         myWebView = new AdvancedWebView(context);
         myWebView.setListener(getActivity(), this);
-       final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=" + botId + "&enableHistory=" + enableHistory + "&ym.payload=" + payloadJSON;
-        // final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=" + botId + "&enableHistory=" + false + "&ym.payload=" + payloadJSON;
+//       final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=" + botId + "&enableHistory=" + enableHistory + "&ym.payload=" + payloadJSON;
+         final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=" + botId + "&enableHistory=" + false + "&ym.payload=" + payloadJSON;
+//         final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=x1597648626586&ym.payload={%22Platform%22:%22Android-App%22}";
 //
         Log.d(TAG, "onCreate: " + botUrl);
         myWebView.getSettings().setSupportMultipleWindows(true);
@@ -115,6 +118,45 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
             myWebView.getSettings().setMediaPlaybackRequiresUserGesture(false);
         }
         myWebView.setWebChromeClient(new WebChromeClient() {
+
+            private View mCustomView;
+            private WebChromeClient.CustomViewCallback mCustomViewCallback;
+            protected FrameLayout mFullscreenContainer;
+            private int mOriginalOrientation;
+            private int mOriginalSystemUiVisibility;
+
+            public Bitmap getDefaultVideoPoster()
+            {
+                if (mCustomView == null) {
+                    return null;
+                }
+                return BitmapFactory.decodeResource(context.getResources(), 2130837573);
+            }
+
+            public void onHideCustomView()
+            {
+                ((FrameLayout)getActivity().getWindow().getDecorView()).removeView(this.mCustomView);
+                this.mCustomView = null;
+                getActivity().getWindow().getDecorView().setSystemUiVisibility(this.mOriginalSystemUiVisibility);
+                getActivity().setRequestedOrientation(this.mOriginalOrientation);
+                this.mCustomViewCallback.onCustomViewHidden();
+                this.mCustomViewCallback = null;
+            }
+
+            public void onShowCustomView(View paramView, WebChromeClient.CustomViewCallback paramCustomViewCallback)
+            {
+                if (this.mCustomView != null)
+                {
+                    onHideCustomView();
+                    return;
+                }
+                this.mCustomView = paramView;
+                this.mOriginalSystemUiVisibility = getActivity().getWindow().getDecorView().getSystemUiVisibility();
+                this.mOriginalOrientation = getActivity().getRequestedOrientation();
+                this.mCustomViewCallback = paramCustomViewCallback;
+                ((FrameLayout)getActivity().getWindow().getDecorView()).addView(this.mCustomView, new FrameLayout.LayoutParams(-1, -1));
+                getActivity().getWindow().getDecorView().setSystemUiVisibility(3846 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            }
 
 
             public void openFileChooser(ValueCallback<Uri> uploadMsg) {

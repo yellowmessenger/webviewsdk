@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     String botId = "x1593069769065";
     String configData = "{" +
             "\"botID\": \""+botId+"\"," +
-            "\"enableSpeech\": \"true\"" +
+            "\"enableSpeech\": \"false\"" +
             "}";
 
 // IDK
