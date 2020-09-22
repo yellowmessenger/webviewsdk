@@ -19,9 +19,18 @@ import android.widget.Switch;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
+//    String botId = "x1597918994847";
+
+ // Home Credit
+    String botId = "x1599123773718";
+//    String botId = "x1587388939730";
+
+    // Dominos
+//    String botId = "x1572447766397";
 
 //TATA Cap
-    String botId = "x1593069769065";
+//    String botId = "x1593069769065";
+
     String configData = "{" +
             "\"botID\": \""+botId+"\"," +
             "\"enableSpeech\": \"false\"" +
@@ -57,11 +66,29 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(BotEventsModel botEvent) {
 
+
+
                     switch (botEvent.getCode()){
-                        case "even-name-1" :
-                            Log.d("Bot event", botEvent.getData()); break;
-                        case "even-name-2" : break;
-                        case "even-name-3" : break;
+                        case "mpin-or-device-lock" :
+                            HashMap<String, Object> payloadData1 = new HashMap<>();
+                            payloadData1.put("Platform", "Android-App");
+                            payloadData1.put("permissions", "allowed");
+                            payloadData1.put("UserId", "9640203005");
+                            pluginYM.setPayload(payloadData1);
+                            pluginYM.startChatBot(MainActivity.this);
+                            break;
+                        case "request-email-popup" :
+                            HashMap<String, Object> payloadData2 = new HashMap<>();
+                            payloadData2.put("Platform", "Android-App");
+                            payloadData2.put("email", "ahmed@yellowmessenger.com");
+                            payloadData2.put("UserId", "9640203005");
+                            payloadData2.put("capture-email", false);
+                            pluginYM.setPayload(payloadData2);
+                            pluginYM.startChatBot(MainActivity.this);
+                            break;
+                        case "user-message" :
+                            Log.d("bleeeehhhh", "Yeaaaaaahhhh");
+                            break;
                     }
                 }
 
@@ -92,6 +119,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         payloadData.put("Platform", "Android-App");
+//        payloadData.put("userStatus", "new");
+//        payloadData.put("userName", "");
+//        payloadData.put("UserId", "9640203005");
+//        payloadData.put("userMobile", "9640203005");
         pluginYM.setPayload(payloadData);
 
 

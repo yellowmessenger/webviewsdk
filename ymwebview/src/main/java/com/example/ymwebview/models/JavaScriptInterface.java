@@ -9,6 +9,12 @@ import android.webkit.WebView;
 import com.example.ymwebview.BotWebView;
 import com.example.ymwebview.YMBotPlugin;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class JavaScriptInterface {
     protected BotWebView parentActivity;
@@ -35,9 +41,17 @@ public class JavaScriptInterface {
     @JavascriptInterface
     public void  receiveMessage(String s) {
         BotEventsModel incomingEvent = new Gson().fromJson(s, BotEventsModel.class);
+
+        Map<String, Object> retMap = new Gson().fromJson(
+                incomingEvent.data, new TypeToken<HashMap<String, Object>>() {}.getType()
+        );
+
+        Boolean isYmAction = retMap.containsKey("ym-action");
+
         Log.d("Event from Bot", "receiveMessage: "+incomingEvent.code);
-        if(!incomingEvent.code.equals("Message Received") && !incomingEvent.code.equals("start-mic"))
+        if(!incomingEvent.code.equals("Message Received") && !incomingEvent.code.equals("start-mic") && !isYmAction) {
             parentActivity.finish();
+        }
         else {
             if(incomingEvent.code.equals("start-mic"))
             parentActivity.runOnUiThread(() -> parentActivity.startMic(Long.parseLong(incomingEvent.data) * 1000));

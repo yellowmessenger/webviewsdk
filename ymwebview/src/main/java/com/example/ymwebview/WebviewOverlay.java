@@ -65,24 +65,19 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         myWebView.loadUrl("");
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode,
-//                                    Intent intent) {
-//        if(requestCode==FILECHOOSER_RESULTCODE)
-//        {
-//            if (null == mUploadMessage) return;
-//            Uri result = intent == null || resultCode != Activity.RESULT_OK ? null
-//                    : intent.getData();
-//            mUploadMessage.onReceiveValue(result);
-//            mUploadMessage = null;
-//        }
-//    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         myWebView.onActivityResult(requestCode, resultCode, intent);
         // ...
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        closeBot();
     }
 
     @Override
@@ -103,10 +98,8 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         String enableHistory = ConfigDataModel.getInstance().getConfig("enableHistory");
         myWebView = new AdvancedWebView(context);
         myWebView.setListener(getActivity(), this);
-//       final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=" + botId + "&enableHistory=" + enableHistory + "&ym.payload=" + payloadJSON;
-         final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=" + botId + "&enableHistory=" + false + "&ym.payload=" + payloadJSON;
-//         final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=x1597648626586&ym.payload={%22Platform%22:%22Android-App%22}";
-//
+         final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=" + botId + "&enableHistory=" + enableHistory + "&ym.payload=" + payloadJSON;
+
         Log.d(TAG, "onCreate: " + botUrl);
         myWebView.getSettings().setSupportMultipleWindows(true);
         myWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
