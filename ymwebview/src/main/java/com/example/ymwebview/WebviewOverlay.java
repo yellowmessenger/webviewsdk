@@ -55,7 +55,7 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
            progressDialog.show();
        }
        catch (Exception e){
-           Log.e(TAG, "YmPlugin: Bot loading dialog ", e );
+           Log.d(TAG, "YmPlugin: Bot loading dialog ");
        }
         myWebView = (AdvancedWebView) preLoadWebView();
         return myWebView;
@@ -98,7 +98,7 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         String enableHistory = ConfigDataModel.getInstance().getConfig("enableHistory");
         myWebView = new AdvancedWebView(context);
         myWebView.setListener(getActivity(), this);
-         final String botUrl = "https://yellowmessenger.github.io/pages/dominos/mobile.html?botId=" + botId + "&enableHistory=" + enableHistory + "&ym.payload=" + payloadJSON;
+         final String botUrl = "https://yellowmessenger.github.io/pages/app/mobile.html?botId=" + botId + "&enableHistory=" + enableHistory + "&ym.payload=" + payloadJSON;
 
         Log.d(TAG, "onCreate: " + botUrl);
         myWebView.getSettings().setSupportMultipleWindows(true);
@@ -184,13 +184,10 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
             }
 
 
-
-
             @Override
             public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
                 AdvancedWebView newWebView = new AdvancedWebView(context);
                 //setContentView(newWebView);
-                Log.d("qwerty", resultMsg.toString());
                 WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
                 transport.setWebView(newWebView);
                 resultMsg.sendToTarget();
@@ -210,16 +207,6 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         myWebView.loadUrl(botUrl);
         return myWebView;
     }
-
-    //    @Override
-//    public void onBackPressed() {
-//        //Log.i("appLog",""+myWebView.canGoBack());
-//        if (myWebView.canGoBack()) {
-//            myWebView.goBack();
-//        }
-//        else {
-//            //super.onBackPressed();
-//        }
 
         public void sendEvent(String s){
             Log.d("Sending Event: ", s);
@@ -258,7 +245,6 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
 
     @Override
     public void onExternalPageRequest(String url) {
-        //Toast.makeText(BotWebView.this, "onExternalPageRequest(url = "+url+")", Toast.LENGTH_SHORT).show();
     }
 
 
