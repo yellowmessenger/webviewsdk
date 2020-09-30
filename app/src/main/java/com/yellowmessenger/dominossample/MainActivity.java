@@ -19,7 +19,11 @@ import android.widget.Switch;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-    String botId = "x1597918994847";
+//    String botId = "x1597918994847";
+
+ // Home Credit
+    String botId = "x1599123773718";
+//    String botId = "x1589521906227";
 
 
 
@@ -28,6 +32,19 @@ public class MainActivity extends AppCompatActivity {
             "\"enableSpeech\": \"false\"" +
             "}";
 
+// IDK
+//    String configData = "{" +
+//            "\"botName\": \"SomeBotName\"," +
+//            "\"botID\": \"x1562765523121\"," +
+//            "\"enableSpeech\": \"false\"" +
+//            "}";
+
+//MPL
+//        String configData = "{" +
+//            "\"botName\": \"SomeBotName\"," +
+//            "\"botID\": \"x1592302653259\"," +
+//            "\"enableSpeech\": \"false\"" +
+//            "}";
 
     HashMap<String, Object> payloadData = new HashMap<>();
 
@@ -50,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case "event-code-2" :
                             break;
+
                     }
                 }
 
@@ -61,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         catch (RuntimeException e){
             Log.w("Plugin Exception", "onCreate: "+e.getMessage());
         }
+
 
         Switch languageSwitch = findViewById(R.id.toggleLanguage);
 
@@ -79,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         payloadData.put("Platform", "Android-App");
+        payloadData.put("UserId", "Priyank");
         pluginYM.setPayload(payloadData);
 
 

@@ -15,9 +15,7 @@ import android.util.Log;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +24,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentManager;
 
@@ -105,6 +103,7 @@ public class BotWebView extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        YMBotPlugin.getInstance().emitEvent(new BotEventsModel("bot-closed",""));
         fh.closeBot();
         this.finish();
     }
@@ -141,7 +140,6 @@ public class BotWebView extends AppCompatActivity {
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS,true);
-//        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
         intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 5);
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,
                 appContext.getPackageName());
@@ -200,6 +198,7 @@ public class BotWebView extends AppCompatActivity {
 
             super.onActivityResult(requestCode, resultCode, data);
             if (fh != null) {
+                Log.d("BotWebView", "onActivityResult is being called");
                 fh.onActivityResult(requestCode, resultCode, data);
             }
 
@@ -209,7 +208,6 @@ public class BotWebView extends AppCompatActivity {
                 case 100:
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     fh.sendEvent(result.get(0));
-//                    toggleBottomSheet();
                     break;
             }
         } else {
@@ -229,7 +227,6 @@ public class BotWebView extends AppCompatActivity {
             Log.d(TAG, "onReadyForSpeech");
         }
 
-//        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         public void onBeginningOfSpeech() {
 
         }

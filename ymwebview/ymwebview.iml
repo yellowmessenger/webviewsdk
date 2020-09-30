@@ -148,7 +148,7 @@
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-livedata-core:2.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.arch.core:core-runtime:2.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout:1.1.3@aar" level="project" />
-    <orderEntry type="library" name="Gradle: com.github.delight-im:Android-AdvancedWebView:v3.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.delight-im:Android-AdvancedWebView:v3.2.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.skyfishjy.ripplebackground:library:1.0.1@aar" level="project" />
   </component>
 </module>

@@ -1,17 +1,17 @@
 package com.example.ymwebview;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Parcelable;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,45 +19,45 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Message;
 import android.util.Log;
+import android.webkit.ConsoleMessage;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
-import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.ymwebview.models.ConfigDataModel;
 import com.example.ymwebview.models.JavaScriptInterface;
 import com.google.gson.Gson;
+
+import java.io.File;
+import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import im.delight.android.webview.AdvancedWebView;
 
+import static android.app.Activity.RESULT_OK;
+
 public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener {
     private final String TAG = "YM WebView Plugin";
-    private AdvancedWebView myWebView;
-    ProgressDialog progressDialog;
+    private WebView myWebView;
 
-    ProgressBar progressBar;
 
     private ValueCallback<Uri> mUploadMessage;
-    private final static int FILECHOOSER_RESULTCODE=1;
+    private Uri mCapturedImageURI = null;
+    private ValueCallback<Uri[]> mFilePathCallback;
+    private String mCameraPhotoPath;
+    private static final int INPUT_FILE_REQUEST_CODE = 1;
+    private static final int FILECHOOSER_RESULTCODE = 1;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
-        progressDialog = new ProgressDialog(getActivity().getApplicationContext());
-        progressDialog.setTitle("Please wait.");
-        progressDialog.setMessage("The bot is initializing...");
-        progressDialog.setCanceledOnTouchOutside(false);
-         try {
-           progressDialog.show();
-       }
-       catch (Exception e){
-           Log.d(TAG, "YmPlugin: Bot loading dialog ");
-       }
-        myWebView = (AdvancedWebView) preLoadWebView();
+
+        myWebView = (WebView) preLoadWebView();
         return myWebView;
     }
 
@@ -67,22 +67,94 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
 
 
 
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+//        super.onActivityResult(requestCode, resultCode, intent);
+//        Log.d("WebviewOverlay", "onActivityResult is being called");
+//        myWebView.onActivityResult(requestCode, resultCode, intent);
+//    }
+
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
-        myWebView.onActivityResult(requestCode, resultCode, intent);
-        // ...
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+
+            if (requestCode != INPUT_FILE_REQUEST_CODE || mFilePathCallback == null) {
+                super.onActivityResult(requestCode, resultCode, data);
+                return;
+            }
+
+            Uri[] results = null;
+
+            // Check that the response is a good one
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    // If there is not data, then we may have taken a photo
+                    if (mCameraPhotoPath != null) {
+                        results = new Uri[]{Uri.parse(mCameraPhotoPath)};
+                    }
+                } else {
+                    String dataString = data.getDataString();
+                    if (dataString != null) {
+                        results = new Uri[]{Uri.parse(dataString)};
+                    }
+                }
+            }
+
+            mFilePathCallback.onReceiveValue(results);
+            mFilePathCallback = null;
+
+        } else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
+            if (requestCode != FILECHOOSER_RESULTCODE || mUploadMessage == null) {
+                super.onActivityResult(requestCode, resultCode, data);
+                return;
+            }
+            if (requestCode == FILECHOOSER_RESULTCODE) {
+
+                if (null == this.mUploadMessage) {
+                    return;
+                }
+                Uri result = null;
+                try {
+                    if (resultCode != RESULT_OK) {
+                        result = null;
+                    } else {
+                        // retrieve from the private variable if the intent is null
+                        result = data == null ? mCapturedImageURI : data.getData();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "activity :" + e,
+                            Toast.LENGTH_LONG).show();
+                }
+                mUploadMessage.onReceiveValue(result);
+                mUploadMessage = null;
+            }
+        }
+        return;
     }
 
     @Override
     public void onStop() {
+
         super.onStop();
-        closeBot();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+    }
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+        File imageFile = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",  /* suffix */
+                storageDir      /* directory */
+        );
+        return imageFile;
     }
 
     @Override
@@ -96,27 +168,151 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         Map payload = ConfigDataModel.getInstance().getPayload();
         String payloadJSON = URLEncoder.encode(new Gson().toJson(payload));
         String enableHistory = ConfigDataModel.getInstance().getConfig("enableHistory");
-        myWebView = new AdvancedWebView(context);
-        myWebView.setListener(getActivity(), this);
+        myWebView = new WebView(context);
+//        myWebView = new AdvancedWebView(context);
+//        myWebView.setListener(getActivity(), this);
          final String botUrl = "https://yellowmessenger.github.io/pages/app/mobile.html?botId=" + botId + "&enableHistory=" + enableHistory + "&ym.payload=" + payloadJSON;
 
+
         Log.d(TAG, "onCreate: " + botUrl);
+        myWebView.getSettings().setJavaScriptEnabled(true);
+        myWebView.getSettings().setDomStorageEnabled(true);
         myWebView.getSettings().setSupportMultipleWindows(true);
         myWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         myWebView.getSettings().setAllowFileAccess(true);
+//        String DESKTOP_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36";
+//        myWebView.getSettings().setUserAgentString(DESKTOP_USER_AGENT);
         myWebView.getSettings().setGeolocationDatabasePath(context.getFilesDir().getPath());
-        myWebView.addJavascriptInterface(new JavaScriptInterface((BotWebView) getActivity(), myWebView), "YMHandler");
+
+//        myWebView.addJavascriptInterface(new JavaScriptInterface((BotWebView) getActivity(), myWebView), "YMHandler");
 
         if (Build.VERSION.SDK_INT > 17) {
             myWebView.getSettings().setMediaPlaybackRequiresUserGesture(false);
+            myWebView.addJavascriptInterface(new JavaScriptInterface((BotWebView) getActivity(), myWebView), "YMHandler");
         }
+
+        myWebView.setWebViewClient(new WebViewClient());
+
         myWebView.setWebChromeClient(new WebChromeClient() {
 
             private View mCustomView;
             private WebChromeClient.CustomViewCallback mCustomViewCallback;
-            protected FrameLayout mFullscreenContainer;
             private int mOriginalOrientation;
             private int mOriginalSystemUiVisibility;
+            @Override
+            public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+                Log.d("WebView", consoleMessage.message());
+                return true;
+            }
+
+            // For Android 5.0
+            public boolean onShowFileChooser(WebView view, ValueCallback<Uri[]> filePath, WebChromeClient.FileChooserParams fileChooserParams) {
+                Log.d(TAG, "openFileChooser: Opening file picker");
+                // Double check that we don't have any existing callbacks
+                if (mFilePathCallback != null) {
+                    mFilePathCallback.onReceiveValue(null);
+                }
+                mFilePathCallback = filePath;
+
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    // Create the File where the photo should go
+                    File photoFile = null;
+                    try {
+                        photoFile = createImageFile();
+                        takePictureIntent.putExtra("PhotoPath", mCameraPhotoPath);
+                    } catch (IOException ex) {
+                        // Error occurred while creating the File
+                        Log.e("ErrorCreatingFile", "Unable to create Image File", ex);
+                    }
+
+                    // Continue only if the File was successfully created
+                    if (photoFile != null) {
+                        mCameraPhotoPath = "file:" + photoFile.getAbsolutePath();
+                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                                Uri.fromFile(photoFile));
+                    } else {
+                        takePictureIntent = null;
+                    }
+                }
+
+                Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
+                contentSelectionIntent.setType("image/*");
+
+                Intent[] intentArray;
+                if (takePictureIntent != null) {
+                    intentArray = new Intent[]{takePictureIntent};
+                } else {
+                    intentArray = new Intent[0];
+                }
+                Intent chooserIntent = new Intent(Intent.ACTION_CHOOSER);
+                chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent);
+                chooserIntent.putExtra(Intent.EXTRA_TITLE, "Image Chooser");
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentArray);
+                getActivity().startActivityForResult(chooserIntent, INPUT_FILE_REQUEST_CODE);
+                return true;
+            }
+
+            // openFileChooser for Android 3.0+
+            public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
+                Log.d(TAG, "openFileChooser: Opening file picker");
+
+                mUploadMessage = uploadMsg;
+                // Create YM_Chatbot_Folder at sdcard
+
+                File imageStorageDir = new File(
+                        Environment.getExternalStoragePublicDirectory(
+                                Environment.DIRECTORY_PICTURES)
+                        , "YM_Chatbot_Folder");
+
+                if (!imageStorageDir.exists()) {
+                    // Create YM_Chatbot_Folder at sdcard
+                    imageStorageDir.mkdirs();
+                }
+
+                // Create camera captured image file path and name
+                File file = new File(
+                        imageStorageDir + File.separator + "IMG_"
+                                + String.valueOf(System.currentTimeMillis())
+                                + ".jpg");
+
+                mCapturedImageURI = Uri.fromFile(file);
+
+                // Camera capture image intent
+                final Intent captureIntent = new Intent(
+                        android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+                captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, mCapturedImageURI);
+
+                Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+                i.addCategory(Intent.CATEGORY_OPENABLE);
+                i.setType("image/*");
+
+                // Create file chooser intent
+                Intent chooserIntent = Intent.createChooser(i, "Image Chooser");
+
+                // Set camera intent to file chooser
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS
+                        , new Parcelable[] { captureIntent });
+
+                // On select image call onActivityResult method of activity
+                getActivity().startActivityForResult(chooserIntent, FILECHOOSER_RESULTCODE);
+            }
+
+            // openFileChooser for Android < 3.0
+            public void openFileChooser(ValueCallback<Uri> uploadMsg) {
+                openFileChooser(uploadMsg, "");
+            }
+
+            //openFileChooser for other Android versions
+            public void openFileChooser(ValueCallback<Uri> uploadMsg,
+                                        String acceptType,
+                                        String capture) {
+                Log.d(TAG, "openFileChooser: Opening file picker");
+
+                openFileChooser(uploadMsg, acceptType);
+            }
 
             public Bitmap getDefaultVideoPoster()
             {
@@ -151,47 +347,13 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
                 getActivity().getWindow().getDecorView().setSystemUiVisibility(3846 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             }
 
-
-            public void openFileChooser(ValueCallback<Uri> uploadMsg) {
-
-                mUploadMessage = uploadMsg;
-                Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-                i.addCategory(Intent.CATEGORY_OPENABLE);
-                i.setType("image/*");
-                WebviewOverlay.this.startActivityForResult(Intent.createChooser(i,"File Chooser"), FILECHOOSER_RESULTCODE);
-
-            }
-
-            // For Android 3.0+
-            public void openFileChooser( ValueCallback uploadMsg, String acceptType ) {
-                mUploadMessage = uploadMsg;
-                Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-                i.addCategory(Intent.CATEGORY_OPENABLE);
-                i.setType("*/*");
-                WebviewOverlay.this.startActivityForResult(
-                        Intent.createChooser(i, "File Browser"),
-                        FILECHOOSER_RESULTCODE);
-            }
-
-            //For Android 4.1
-            public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture){
-                mUploadMessage = uploadMsg;
-                Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-                i.addCategory(Intent.CATEGORY_OPENABLE);
-                i.setType("image/*");
-                WebviewOverlay.this.startActivityForResult( Intent.createChooser( i, "File Chooser" ), WebviewOverlay.FILECHOOSER_RESULTCODE );
-
-            }
-
-
             @Override
             public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
-                AdvancedWebView newWebView = new AdvancedWebView(context);
-                //setContentView(newWebView);
+//                AdvancedWebView newWebView = new AdvancedWebView(context);
+                WebView newWebView = new WebView(context);
                 WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
                 transport.setWebView(newWebView);
                 resultMsg.sendToTarget();
-//                view.loadUrl(botUrl);
                 newWebView.setWebViewClient(new WebViewClient() {
                     @Override
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -206,7 +368,10 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         });
         myWebView.loadUrl(botUrl);
         return myWebView;
+
+
     }
+
 
         public void sendEvent(String s){
             Log.d("Sending Event: ", s);
@@ -218,24 +383,12 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
 
     @Override
     public void onPageFinished(String url) {
-        try {
-            progressDialog.dismiss();
-        }
-        catch (Exception e){
-            Log.e(TAG, "YmPlugin: Bot loading dialog dismiss ", e );
-        }
         myWebView.setVisibility(View.VISIBLE);
     }
 
 
     @Override
     public void onPageError(int errorCode, String description, String failingUrl) {
-        try {
-            progressDialog.dismiss();
-        }
-        catch (Exception e){
-            Log.e(TAG, "YmPlugin: Bot loading dialog dismiss ", e );
-        }
         Log.e("WebView Error", "onPageError(errorCode = "+errorCode+",  description = "+description+",  failingUrl = "+failingUrl+")");
     }
 
