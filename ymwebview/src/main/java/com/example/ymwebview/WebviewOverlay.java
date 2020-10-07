@@ -2,6 +2,7 @@ package com.example.ymwebview;
 
 import android.app.Activity;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
@@ -31,13 +32,25 @@ import com.example.ymwebview.models.ConfigDataModel;
 import com.example.ymwebview.models.JavaScriptInterface;
 import com.google.gson.Gson;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import im.delight.android.webview.AdvancedWebView;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -162,9 +175,16 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         super.onPause();
     }
 
+
     public View preLoadWebView() {
+        // Testing API call.
+
+
+
+        // Preload start
         final Context context = getActivity();
         String botId = ConfigDataModel.getInstance().getConfig("botID");
+        String imagePath = ConfigDataModel.getInstance().getConfig("imagePath");
         Map payload = ConfigDataModel.getInstance().getPayload();
         String payloadJSON = URLEncoder.encode(new Gson().toJson(payload));
         String enableHistory = ConfigDataModel.getInstance().getConfig("enableHistory");
@@ -402,4 +422,3 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
 
 
 }
-

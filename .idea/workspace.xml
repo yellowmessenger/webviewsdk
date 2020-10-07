@@ -12,7 +12,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a19e53d-8366-4472-bba0-dd3846e3a4c2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_github_delight_im_Android_AdvancedWebView_v3_2_1_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okhttp3_okhttp_4_9_0_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okio_okio_2_8_0_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_annotations_13_0_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_1_4_10_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_common_1_4_10_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -27,13 +31,16 @@
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/yellowmessenger/dominossample/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/yellowmessenger/dominossample/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/com/google/android/material/group-index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/com/google/android/material/group-index.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/master-index.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/maven.google/master-index.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/intermediates/lint-cache/sdk-registry.xml/sdk-registry.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/intermediates/lint-cache/sdk-registry.xml/sdk-registry.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ymwebview/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/ymwebview/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/BotWebView.java" beforeDir="false" afterPath="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/BotWebView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/WebviewOverlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/WebviewOverlay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/YMBotPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/YMBotPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/models/ConfigDataModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/models/ConfigDataModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ymwebview/ymwebview.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ymwebview/ymwebview.iml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -82,8 +89,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yellowmessenger/dominossample/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="133" lean-forward="true" selection-start-line="133" selection-end-line="133" />
+            <state relative-caret-position="372">
+              <caret line="31" column="40" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -92,37 +99,43 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
+        <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/WebviewOverlay.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="1" lean-forward="true" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
+            <state relative-caret-position="-1669">
+              <caret line="193" column="103" selection-start-line="193" selection-start-column="98" selection-end-line="193" selection-end-column="103" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/WebviewOverlay.java">
+        <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/models/JavaScriptInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="24" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+            <state relative-caret-position="630">
+              <caret line="55" column="57" selection-start-line="55" selection-start-column="44" selection-end-line="55" selection-end-column="57" />
               <folding>
-                <element signature="e#2024#2025#0" expanded="true" />
-                <element signature="e#2061#2062#0" expanded="true" />
-                <element signature="e#4721#4722#0" expanded="true" />
-                <element signature="e#4753#4754#0" expanded="true" />
-                <element signature="e#5376#5377#0" expanded="true" />
-                <element signature="e#5407#5408#0" expanded="true" />
-                <element signature="method#openFileChooser#0;class#6916:14892" />
-                <element signature="method#openFileChooser#1;class#6916:14892" />
-                <element signature="method#openFileChooser#2;class#6916:14892" />
-                <element signature="method#getDefaultVideoPoster#0;class#6916:14892" />
-                <element signature="method#onHideCustomView#0;class#6916:14892" />
-                <element signature="method#onShowCustomView#0;class#6916:14892" />
-                <element signature="e#14985#15397#0" expanded="true" />
-                <element signature="e#15396#15397#0" expanded="true" />
-                <element signature="e#15819#15820#0" expanded="true" />
-                <element signature="e#15872#15873#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/YMBotPlugin.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="67" column="5" lean-forward="true" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/models/ConfigDataModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-538">
+              <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -130,26 +143,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ymwebview/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="48" column="73" selection-start-line="48" selection-start-column="73" selection-end-line="48" selection-end-column="73" />
+            <state relative-caret-position="639">
+              <caret line="51" column="54" selection-start-line="51" selection-start-column="54" selection-end-line="51" selection-end-column="54" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ymwebview/src/main/AndroidManifest.xml">
-          <provider editor-type-id="android-manifest" />
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
               <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
             </state>
           </provider>
+          <provider editor-type-id="android-manifest" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
+            <state relative-caret-position="690">
               <caret line="46" column="41" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
             </state>
           </provider>
@@ -157,22 +170,21 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider editor-type-id="android-manifest" />
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="450">
               <caret line="30" column="11" selection-start-line="29" selection-end-line="30" selection-end-column="11" />
             </state>
           </provider>
+          <provider editor-type-id="android-manifest" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/BotWebView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="206" column="31" selection-start-line="206" selection-start-column="20" selection-end-line="206" selection-end-column="31" />
+            <state relative-caret-position="1642">
+              <caret line="171" column="77" selection-start-line="171" selection-start-column="68" selection-end-line="171" selection-end-column="77" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#startMic#0;class#BotWebView#0" />
                 <element signature="method#speechRecognition#0;class#BotWebView#0" />
               </folding>
             </state>
@@ -202,6 +214,7 @@
       <find>close</find>
       <find>createImageFile</find>
       <find>startActivityForResult</find>
+      <find>local li</find>
     </findStrings>
   </component>
   <component name="GenerateSignedApkSettings">
@@ -220,8 +233,6 @@
         <option value="$PROJECT_DIR$/ymwebview/src/main/res/layout/fragment_speecharea_list_dialog.xml" />
         <option value="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/SpeechAreaListDialogFragment.java" />
         <option value="$PROJECT_DIR$/ymwebview/src/main/res/layout/webviewoverlay.xml" />
-        <option value="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/YMBotPlugin.java" />
-        <option value="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/models/ConfigDataModel.java" />
         <option value="$PROJECT_DIR$/ymwebview/src/main/res/values-v21/styles.xml" />
         <option value="$PROJECT_DIR$/ymwebview/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
@@ -232,17 +243,19 @@
         <option value="$PROJECT_DIR$/ymwebview/src/main/res/layout/activity_bot_web_view.xml" />
         <option value="$PROJECT_DIR$/ymwebview/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/models/JavaScriptInterface.java" />
-        <option value="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/BotWebView.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/yellowmessenger/dominossample/mainactivity_backup.java" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/ymwebview/build.gradle" />
         <option value="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/WebviewOverlay.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/yellowmessenger/dominossample/mainactivity_backup.java" />
+        <option value="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/models/ConfigDataModel.java" />
+        <option value="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/YMBotPlugin.java" />
+        <option value="$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/BotWebView.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/yellowmessenger/dominossample/MainActivity.java" />
-        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="width" value="1920" />
     <option name="height" value="1080" />
   </component>
@@ -251,7 +264,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -360,7 +373,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -485,11 +498,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.21916972" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.122470714" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
@@ -501,11 +514,11 @@
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.29591838" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Android Profiler" order="3" />
-      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.49893504" weight="0.422449" />
+      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.49893504" weight="0.43069306" />
       <window_info anchor="bottom" id="Terminal" order="5" weight="0.32959184" />
       <window_info anchor="bottom" id="Event Log" order="6" sideWeight="0.5005325" side_tool="true" weight="0.28118813" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32959184" />
-      <window_info anchor="bottom" id="Build" order="8" sideWeight="0.49840257" visible="true" weight="0.30306122" />
+      <window_info anchor="bottom" id="Build" order="8" sideWeight="0.49840257" weight="0.26435643" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.32959184" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
@@ -544,20 +557,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-29/android/speech/SpeechRecognizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="261" column="16" selection-start-line="261" selection-start-column="16" selection-end-line="261" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="45" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ymwebview/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -664,13 +663,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="45" column="28" selection-start-line="45" selection-start-column="28" selection-end-line="45" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/YMBotPlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="57" column="59" selection-start-line="57" selection-start-column="49" selection-end-line="57" selection-end-column="59" />
         </state>
       </provider>
     </entry>
@@ -836,16 +828,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/models/JavaScriptInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.fragment/fragment/1.1.0/b9ebb04df2cb0cad4419af3c658690bc82aa5706/fragment-1.1.0-sources.jar!/androidx/fragment/app/FragmentHostCallback.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="301">
@@ -863,73 +845,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="46" column="41" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="11" selection-start-line="29" selection-end-line="30" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ymwebview/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ymwebview/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="48" column="73" selection-start-line="48" selection-start-column="73" selection-end-line="48" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/WebviewOverlay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="24" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
-          <folding>
-            <element signature="e#2024#2025#0" expanded="true" />
-            <element signature="e#2061#2062#0" expanded="true" />
-            <element signature="e#4721#4722#0" expanded="true" />
-            <element signature="e#4753#4754#0" expanded="true" />
-            <element signature="e#5376#5377#0" expanded="true" />
-            <element signature="e#5407#5408#0" expanded="true" />
-            <element signature="method#openFileChooser#0;class#6916:14892" />
-            <element signature="method#openFileChooser#1;class#6916:14892" />
-            <element signature="method#openFileChooser#2;class#6916:14892" />
-            <element signature="method#getDefaultVideoPoster#0;class#6916:14892" />
-            <element signature="method#onHideCustomView#0;class#6916:14892" />
-            <element signature="method#onShowCustomView#0;class#6916:14892" />
-            <element signature="e#14985#15397#0" expanded="true" />
-            <element signature="e#15396#15397#0" expanded="true" />
-            <element signature="e#15819#15820#0" expanded="true" />
-            <element signature="e#15872#15873#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/BotWebView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="206" column="31" selection-start-line="206" selection-start-column="20" selection-end-line="206" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#startMic#0;class#BotWebView#0" />
-            <element signature="method#speechRecognition#0;class#BotWebView#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yellowmessenger/dominossample/mainactivity_backup.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="339">
@@ -937,20 +852,102 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yellowmessenger/dominossample/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/BotEventListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="133" lean-forward="true" selection-start-line="133" selection-end-line="133" />
+        <state relative-caret-position="60">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="3" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ymwebview/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="46" column="41" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="11" selection-start-line="29" selection-end-line="30" selection-end-column="11" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/models/JavaScriptInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="55" column="57" selection-start-line="55" selection-start-column="44" selection-end-line="55" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/ymwebview/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="639">
+          <caret line="51" column="54" selection-start-line="51" selection-start-column="54" selection-end-line="51" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/YMBotPlugin.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
-          <caret line="27" column="1" lean-forward="true" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
+          <caret line="67" column="5" lean-forward="true" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/models/ConfigDataModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-538">
+          <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/BotWebView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1642">
+          <caret line="171" column="77" selection-start-line="171" selection-start-column="68" selection-end-line="171" selection-end-column="77" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#speechRecognition#0;class#BotWebView#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/yellowmessenger/dominossample/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="31" column="40" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ymwebview/src/main/java/com/example/ymwebview/WebviewOverlay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1669">
+          <caret line="193" column="103" selection-start-line="193" selection-start-column="98" selection-end-line="193" selection-end-column="103" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -99,7 +99,14 @@ public class MainActivity extends AppCompatActivity {
 
         payloadData.put("Platform", "Android-App");
         payloadData.put("UserId", "Priyank");
+
+        HashMap<String, Object> customData = new HashMap<>();
+
         pluginYM.setPayload(payloadData);
+
+        //Setting image path
+        customData.put("imagePath","/storage/emulated/0/Pictures/JPEG_20200930_152654_7830371160876443634.jpg");
+        pluginYM.setCustomData(customData);
 
 
 

@@ -32,17 +32,36 @@ import com.example.ymwebview.models.BotEventsModel;
 import com.example.ymwebview.models.ConfigDataModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.skyfishjy.library.RippleBackground;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class BotWebView extends AppCompatActivity {
     private final String TAG = "YM WebView Plugin";
     WebviewOverlay fh;
     private boolean willStartMic = false;
+    public String postUrl= "https://app.yellowmessenger.com/api/chat/upload?bot=";
+
+
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
 
     public void startMic(long countdown_time){
         RelativeLayout voiceArea = findViewById(R.id.voiceArea);
@@ -66,6 +85,34 @@ public class BotWebView extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // setting up local listener
+        Log.d(TAG, "onCreate: setting up local listener");
+        YMBotPlugin.getInstance().setLocalListener(new BotEventListener() {
+            @Override
+            public void onSuccess(BotEventsModel botEvent) {
+                Log.d(TAG, "onSuccess: "+botEvent.getCode());
+
+                switch (botEvent.getCode()){
+                    case "need-ym-image" :
+//                        uid
+                        Map<String, Object> retMap = new Gson().fromJson(
+                                botEvent.getData(), new TypeToken<HashMap<String, Object>>() {}.getType());
+                         if(retMap.containsKey("uid")){
+                             String uId = retMap.get("uid").toString();
+
+                             runUpload(uId);
+
+                         }
+                        break;
+                }
+            }
+            @Override
+            public void onFailure(String error) {
+            }
+        });
+
+
         ViewCompat.setOnApplyWindowInsetsListener(
                 findViewById(android.R.id.content), (v, insets) -> {
                     ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
@@ -98,7 +145,77 @@ public class BotWebView extends AppCompatActivity {
 
 
 
+//        new CountDownTimer(10000, 1000) {
+//            public void onTick(long millisUntilFinished) {}
+//            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+//            public void onFinish() {
+//                runUpload();
+//            }
+//        }.start();
+//
+
     }
+
+    public void runUpload(String uid){
+        try {
+            String botId = ConfigDataModel.getInstance().getConfig("botID");
+            postUrl= postUrl + botId + "&uid="+uid+"&secure=false";
+            run();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void run() throws IOException {
+
+        OkHttpClient client = new OkHttpClient();
+        String imagePath = ConfigDataModel.getInstance().getConfig("imagePath");
+
+        String filePath = ConfigDataModel.getInstance().getCustomDataByKey("imagePath");
+        File sourceFile = new File(filePath);
+//        File sourceFile = new File("/storage/emulated/0/Pictures/JPEG_20200930_152654_7830371160876443634.jpg");
+
+        Log.d(TAG, "File...::::" + sourceFile + " : " + sourceFile.exists());
+
+        final MediaType MEDIA_TYPE = imagePath.endsWith("png") ?
+                MediaType.parse("image/png") : MediaType.parse("image/jpeg");
+        Log.d(TAG, "run: "+postUrl);
+        Log.d(TAG, sourceFile.getName()+"."+MEDIA_TYPE.subtype());
+
+
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("images", sourceFile.getName()+"."+MEDIA_TYPE.subtype(), RequestBody.create( sourceFile, MEDIA_TYPE))
+                .build();
+
+        Request request = new Request.Builder()
+                .url(postUrl)
+                .post(requestBody)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                call.cancel();
+                Log.d("Upload", "Can't upload");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                final String myResponse = response.body().string();
+
+                BotWebView.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d("Upload", myResponse);
+                    }
+                });
+
+            }
+        });
+    }
+
 
     @Override
     public void onBackPressed() {

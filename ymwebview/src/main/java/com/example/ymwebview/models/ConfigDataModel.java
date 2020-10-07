@@ -8,10 +8,12 @@ public class ConfigDataModel{
     private static ConfigDataModel configInstance;
     private final Map<String, String> config;
     private final Map<String, String> payload;
+    private final Map<String, String> customData;
 
     private ConfigDataModel(){
         config = new HashMap<>();
         payload = new HashMap<>();
+        customData = new HashMap<>();
     }
 
     public static  ConfigDataModel getInstance(){
@@ -58,7 +60,27 @@ public class ConfigDataModel{
         return false;
     }
 
+    public boolean setCustomData(Map customDataPayload) {
+        if (customDataPayload !=null) {
+            customData.putAll(customDataPayload);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean emptyCustomdata() {
+        if (customData !=null) {
+            customData.clear();
+            return true;
+        }
+        return false;
+    }
+
     public String getPayloadByKey(String key) {
+        return payload.get(key);
+    }
+
+    public String getCustomDataByKey(String key) {
         return payload.get(key);
     }
 

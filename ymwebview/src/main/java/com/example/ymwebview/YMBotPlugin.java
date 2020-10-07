@@ -16,6 +16,7 @@ public class YMBotPlugin {
     private Context myContext;
     private Intent _intent;
     private BotEventListener listener;
+    private BotEventListener localListener;
     private static YMBotPlugin botPluginInstance;
     private boolean isInitialized;
 
@@ -31,6 +32,9 @@ public class YMBotPlugin {
             }
         }
         return  botPluginInstance;
+    }
+    public void setLocalListener(BotEventListener localListener){
+        this.localListener = localListener;
     }
 
     public void init(String configData, BotEventListener listener){
@@ -58,10 +62,16 @@ public class YMBotPlugin {
         ConfigDataModel.getInstance().setPayload(botPayload);
     }
 
+    public void setCustomData(Map botCustomPayload){
+        ConfigDataModel.getInstance().emptyCustomdata();
+        ConfigDataModel.getInstance().setCustomData(botCustomPayload);
+    }
+
     public void emitEvent(BotEventsModel event){
         if(event != null){
             Log.v("WebView Event","From Bot: "+event.getCode());
             listener.onSuccess(event);
+            localListener.onSuccess(event);
         }
         else
             listener.onFailure("An error occurred.");
