@@ -47,6 +47,7 @@ public class JavaScriptInterface {
 
         Log.d("Event from Bot", "receiveMessage: "+incomingEvent.code);
         if(!incomingEvent.code.equals("Message Received") && !incomingEvent.code.equals("start-mic") && !isYmAction) {
+            parentActivity.runOnUiThread(() -> parentActivity.closeBot());
             parentActivity.finish();
         }
         else {

@@ -79,6 +79,10 @@ public class BotWebView extends AppCompatActivity {
         }
     }
 
+    public void closeBot(){
+        fh.closeBot();
+    }
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
