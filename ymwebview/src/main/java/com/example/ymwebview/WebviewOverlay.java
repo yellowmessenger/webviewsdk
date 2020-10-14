@@ -32,29 +32,16 @@ import com.example.ymwebview.models.ConfigDataModel;
 import com.example.ymwebview.models.JavaScriptInterface;
 import com.google.gson.Gson;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
-import im.delight.android.webview.AdvancedWebView;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 import static android.app.Activity.RESULT_OK;
 
-public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener {
+public class WebviewOverlay extends Fragment  {
     private final String TAG = "YM WebView Plugin";
     private WebView myWebView;
 
@@ -78,14 +65,6 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         myWebView.loadUrl("");
     }
 
-
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-//        super.onActivityResult(requestCode, resultCode, intent);
-//        Log.d("WebviewOverlay", "onActivityResult is being called");
-//        myWebView.onActivityResult(requestCode, resultCode, intent);
-//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -397,28 +376,28 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
             Log.d("Sending Event: ", s);
             myWebView.loadUrl("javascript:sendEvent(\""+s+"\");");
     }
-    @Override
-    public void onPageStarted(String url, Bitmap favicon) {
-    }
-
-    @Override
-    public void onPageFinished(String url) {
-        myWebView.setVisibility(View.VISIBLE);
-    }
-
-
-    @Override
-    public void onPageError(int errorCode, String description, String failingUrl) {
-        Log.e("WebView Error", "onPageError(errorCode = "+errorCode+",  description = "+description+",  failingUrl = "+failingUrl+")");
-    }
-
-    @Override
-    public void onDownloadRequested(String url, String suggestedFilename, String mimeType, long contentLength, String contentDisposition, String userAgent) {
-    }
-
-    @Override
-    public void onExternalPageRequest(String url) {
-    }
+//    @Override
+//    public void onPageStarted(String url, Bitmap favicon) {
+//    }
+//
+//    @Override
+//    public void onPageFinished(String url) {
+//        myWebView.setVisibility(View.VISIBLE);
+//    }
+//
+//
+//    @Override
+//    public void onPageError(int errorCode, String description, String failingUrl) {
+//        Log.e("WebView Error", "onPageError(errorCode = "+errorCode+",  description = "+description+",  failingUrl = "+failingUrl+")");
+//    }
+//
+//    @Override
+//    public void onDownloadRequested(String url, String suggestedFilename, String mimeType, long contentLength, String contentDisposition, String userAgent) {
+//    }
+//
+//    @Override
+//    public void onExternalPageRequest(String url) {
+//    }
 
 
 }

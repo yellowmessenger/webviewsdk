@@ -63,7 +63,15 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(BotEventsModel botEvent) {
 
                     switch (botEvent.getCode()){
-                        case "event-code" :
+                        case "request-camera-open" :
+                            HashMap<String, Object> customData = new HashMap<>();
+                            customData.put("imagePath","/storage/emulated/0/Pictures/JPEG_20200930_152654_7830371160876443634.jpg");
+                            pluginYM.setCustomData(customData);
+                            payloadData.put("Platform", "Android-App");
+                            payloadData.put("UserId", "Priyank");
+                            pluginYM.setPayload(payloadData);
+                            pluginYM.startChatBot(MainActivity.this);
+
                             break;
                         case "event-code-2" :
                             break;
@@ -100,13 +108,12 @@ public class MainActivity extends AppCompatActivity {
         payloadData.put("Platform", "Android-App");
         payloadData.put("UserId", "Priyank");
 
-        HashMap<String, Object> customData = new HashMap<>();
+
 
         pluginYM.setPayload(payloadData);
 
         //Setting image path
-        customData.put("imagePath","/storage/emulated/0/Pictures/JPEG_20200930_152654_7830371160876443634.jpg");
-        pluginYM.setCustomData(customData);
+
 
 
 

@@ -81,7 +81,7 @@ public class ConfigDataModel{
     }
 
     public String getCustomDataByKey(String key) {
-        return payload.get(key);
+        return customData.get(key);
     }
 
     public Map<String, String> getPayload() {

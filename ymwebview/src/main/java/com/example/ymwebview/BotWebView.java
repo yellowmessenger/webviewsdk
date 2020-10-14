@@ -94,8 +94,8 @@ public class BotWebView extends AppCompatActivity {
                 Log.d(TAG, "onSuccess: "+botEvent.getCode());
 
                 switch (botEvent.getCode()){
-                    case "need-ym-image" :
-//                        uid
+                    case "upload-image" :
+                        Log.d(TAG, "onSuccess: got event");
                         Map<String, Object> retMap = new Gson().fromJson(
                                 botEvent.getData(), new TypeToken<HashMap<String, Object>>() {}.getType());
                          if(retMap.containsKey("uid")){
@@ -142,18 +142,6 @@ public class BotWebView extends AppCompatActivity {
             this.finish();
         });
 
-
-
-
-//        new CountDownTimer(10000, 1000) {
-//            public void onTick(long millisUntilFinished) {}
-//            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-//            public void onFinish() {
-//                runUpload();
-//            }
-//        }.start();
-//
-
     }
 
     public void runUpload(String uid){
@@ -169,11 +157,11 @@ public class BotWebView extends AppCompatActivity {
     void run() throws IOException {
 
         OkHttpClient client = new OkHttpClient();
-        String imagePath = ConfigDataModel.getInstance().getConfig("imagePath");
 
-        String filePath = ConfigDataModel.getInstance().getCustomDataByKey("imagePath");
-        File sourceFile = new File(filePath);
-//        File sourceFile = new File("/storage/emulated/0/Pictures/JPEG_20200930_152654_7830371160876443634.jpg");
+        String imagePath = ConfigDataModel.getInstance().getCustomDataByKey("imagePath");
+        Log.d(TAG, "run: "+imagePath);
+
+        File sourceFile = new File(imagePath);
 
         Log.d(TAG, "File...::::" + sourceFile + " : " + sourceFile.exists());
 
@@ -185,7 +173,7 @@ public class BotWebView extends AppCompatActivity {
 
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("images", sourceFile.getName()+"."+MEDIA_TYPE.subtype(), RequestBody.create( sourceFile, MEDIA_TYPE))
+                .addFormDataPart("images", sourceFile.getName()+"."+MEDIA_TYPE.subtype(), RequestBody.create(MEDIA_TYPE, sourceFile))
                 .build();
 
         Request request = new Request.Builder()
