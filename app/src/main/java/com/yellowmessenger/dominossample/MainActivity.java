@@ -23,13 +23,22 @@ public class MainActivity extends AppCompatActivity {
 
  // Home Credit
     String botId = "x1599123773718";
+
+
+
+    // HLA
+//    String botId = "x1592218269082";
+
+
+
 //    String botId = "x1589521906227";
 
 
 
     String configData = "{" +
             "\"botID\": \""+botId+"\"," +
-            "\"enableSpeech\": \"false\"" +
+            "\"enableSpeech\": \"false\"," +
+            "\"enableHistory\": \"true\"" +
             "}";
 
 // IDK
@@ -63,19 +72,59 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(BotEventsModel botEvent) {
 
                     switch (botEvent.getCode()){
+//                        case "hla_event" :
+//                            HashMap<String, Object> customData = new HashMap<>();
+//                            HashMap<String, Object> payloadData1 = new HashMap<>();
+//                            customData.put("imagePath","/storage/emulated/0/Pictures/JPEG_20200930_152654_7830371160876443634.jpg");
+//                            pluginYM.setCustomData(customData);
+//                            payloadData1.put("UserId","1602659471019");
+//                            payloadData1.put("platform","Android-App");
+//                            pluginYM.setPayload(payloadData1);
+//                            pluginYM.startChatBot(MainActivity.this);
+//
+//                            break;
+
                         case "request-camera-open" :
                             HashMap<String, Object> customData = new HashMap<>();
+                            HashMap<String, Object> payloadData1 = new HashMap<>();
                             customData.put("imagePath","/storage/emulated/0/Pictures/JPEG_20200930_152654_7830371160876443634.jpg");
                             pluginYM.setCustomData(customData);
-                            payloadData.put("Platform", "Android-App");
-                            payloadData.put("UserId", "Priyank");
-                            pluginYM.setPayload(payloadData);
+                            payloadData1.put("UserId","1602659471019");
+                            payloadData1.put("platform","Android-App");
+                            pluginYM.setPayload(payloadData1);
                             pluginYM.startChatBot(MainActivity.this);
 
-                            break;
-                        case "event-code-2" :
-                            break;
+                        break;
 
+                        case "mpin-or-device-lock" :
+                            HashMap<String, Object> customData2 = new HashMap<>();
+                            customData2.put("UserId","1602659471019");
+                            customData2.put("permissions","pending");
+                            customData2.put("platform","Android-App");
+                            pluginYM.setPayload(customData2);
+                            pluginYM.startChatBot(MainActivity.this);
+
+                        break;
+
+                        case "request-email-popup" :
+                            HashMap<String, Object> customData3 = new HashMap<>();
+                            customData3.put("UserId","1602659471019");
+                            customData3.put("capture-manual",false);
+                            customData3.put("platform","Android-App");
+                            customData3.put("email", "ahmed@yellowmessenger.com");
+                            pluginYM.setPayload(customData3);
+                            pluginYM.startChatBot(MainActivity.this);
+                        break;
+
+                        case "get-encrypted-phone" :
+                            HashMap<String, Object> customData4 = new HashMap<>();
+                            customData4.put("UserId","1602659471019");
+                            customData4.put("encrypted-phone","Lol");
+                            customData4.put("platform","Android-App");
+                            customData4.put("email", "ahmed@yellowmessenger.com");
+                            pluginYM.setPayload(customData4);
+                            pluginYM.startChatBot(MainActivity.this);
+                        break;
                     }
                 }
 
@@ -106,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         payloadData.put("Platform", "Android-App");
-        payloadData.put("UserId", "Priyank");
+        payloadData.put("UserId","1602659471019");
 
 
 

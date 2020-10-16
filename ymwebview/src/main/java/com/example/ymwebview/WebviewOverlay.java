@@ -80,8 +80,8 @@ public class WebviewOverlay extends Fragment  {
 
             // Check that the response is a good one
             if (resultCode == Activity.RESULT_OK) {
-                if (data != null) {
-                    // If there is not data, then we may have taken a photo
+                if (data.getDataString() == null) {
+                    // If there is no data, then we may have taken a photo
                     if (mCameraPhotoPath != null) {
                         results = new Uri[]{Uri.parse(mCameraPhotoPath)};
                     }
@@ -91,6 +91,7 @@ public class WebviewOverlay extends Fragment  {
                         results = new Uri[]{Uri.parse(dataString)};
                     }
                 }
+
             }
 
             mFilePathCallback.onReceiveValue(results);
@@ -135,6 +136,8 @@ public class WebviewOverlay extends Fragment  {
     public void onResume() {
         super.onResume();
     }
+
+
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -163,13 +166,10 @@ public class WebviewOverlay extends Fragment  {
         // Preload start
         final Context context = getActivity();
         String botId = ConfigDataModel.getInstance().getConfig("botID");
-        String imagePath = ConfigDataModel.getInstance().getConfig("imagePath");
         Map payload = ConfigDataModel.getInstance().getPayload();
         String payloadJSON = URLEncoder.encode(new Gson().toJson(payload));
         String enableHistory = ConfigDataModel.getInstance().getConfig("enableHistory");
         myWebView = new WebView(context);
-//        myWebView = new AdvancedWebView(context);
-//        myWebView.setListener(getActivity(), this);
          final String botUrl = "https://yellowmessenger.github.io/pages/app/mobile.html?botId=" + botId + "&enableHistory=" + enableHistory + "&ym.payload=" + payloadJSON;
 
 
@@ -179,11 +179,8 @@ public class WebviewOverlay extends Fragment  {
         myWebView.getSettings().setSupportMultipleWindows(true);
         myWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         myWebView.getSettings().setAllowFileAccess(true);
-//        String DESKTOP_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36";
-//        myWebView.getSettings().setUserAgentString(DESKTOP_USER_AGENT);
         myWebView.getSettings().setGeolocationDatabasePath(context.getFilesDir().getPath());
 
-//        myWebView.addJavascriptInterface(new JavaScriptInterface((BotWebView) getActivity(), myWebView), "YMHandler");
 
         if (Build.VERSION.SDK_INT > 17) {
             myWebView.getSettings().setMediaPlaybackRequiresUserGesture(false);
@@ -237,7 +234,7 @@ public class WebviewOverlay extends Fragment  {
 
                 Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
-                contentSelectionIntent.setType("image/*");
+                contentSelectionIntent.setType("*/*");
 
                 Intent[] intentArray;
                 if (takePictureIntent != null) {

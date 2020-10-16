@@ -319,7 +319,11 @@ public class BotWebView extends AppCompatActivity {
                     fh.sendEvent(result.get(0));
                     break;
             }
-        } else {
+        }
+        else if(null == data){
+
+        }
+        else {
             Toast.makeText(getApplicationContext(), "Failed to recognize speech!", Toast.LENGTH_LONG).show();
         }
     }
