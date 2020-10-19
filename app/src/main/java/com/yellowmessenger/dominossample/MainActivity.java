@@ -1,5 +1,6 @@
 package com.yellowmessenger.dominossample;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.example.ymwebview.BotEventListener;
@@ -9,6 +10,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import android.util.Log;
 import android.view.Menu;
@@ -54,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
 //            "\"botID\": \"x1592302653259\"," +
 //            "\"enableSpeech\": \"false\"" +
 //            "}";
+
+
+
+
+
 
     HashMap<String, Object> payloadData = new HashMap<>();
 
@@ -156,17 +163,16 @@ public class MainActivity extends AppCompatActivity {
 
         payloadData.put("Platform", "Android-App");
         payloadData.put("UserId","1602659471019");
-
-
-
         pluginYM.setPayload(payloadData);
 
-        //Setting image path
 
-
-
-
-
+        //Setting Color
+        HashMap<String, Object> customSettings = new HashMap<> ();
+        int actionBarColor = ContextCompat.getColor(this, R.color.colorPrimary);
+        int statusBarColor = ContextCompat.getColor(this, R.color.colorPrimaryDark);
+        customSettings.put("actionBarColor", String.valueOf(actionBarColor));
+        customSettings.put("statusBarColor", String.valueOf(statusBarColor));
+        pluginYM.setCustomData(customSettings);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);

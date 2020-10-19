@@ -4,6 +4,7 @@ package com.example.ymwebview;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -15,6 +16,8 @@ import android.util.Log;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,8 +26,10 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentManager;
 
@@ -83,12 +88,81 @@ public class BotWebView extends AppCompatActivity {
         fh.closeBot();
     }
 
+    public void setStatusBarColor(){
+        try{
+        String color = ConfigDataModel.getInstance().getCustomDataByKey("statusBarColor");
+        boolean isHexCode = color.matches("-?[0-9a-fA-F]+");
+
+            Log.d(TAG, "setStatusBarColor: "+isHexCode);
+
+        int customColor = -1;
+        try {
+
+            customColor = isHexCode ? Integer.parseInt(color, 16)  : Integer.parseInt(color);
+
+        }
+        catch (Exception e){
+            Log.d(TAG, e.getMessage());
+        }
+
+        if(customColor != -1) {
+
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = BotWebView.this.getWindow();
+                // clear FLAG_TRANSLUCENT_STATUS flag:
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                // finally change the color
+                window.setStatusBarColor(customColor);
+            }
+        }
+        }
+        catch (Exception e){
+
+            Log.d(TAG, "Incorrect color code for status bar.");
+        }
+    }
+
+    public void setActionBarColor(){
+        try{
+            String color = ConfigDataModel.getInstance().getCustomDataByKey("actionBarColor");
+            boolean isHexCode = color.matches("-?[0-9a-fA-F]+");
+            int customColor = -1;
+            try {
+                customColor = isHexCode ? Integer.parseInt(color, 16)  : Integer.parseInt(color);
+            }
+            catch (Exception e){
+                Log.d(TAG, e.getMessage());
+            }
+
+            if(customColor != -1) {
+
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ActionBar actionBar = BotWebView.this.getSupportActionBar();
+                    if (actionBar != null) {
+                        actionBar.setBackgroundDrawable(new ColorDrawable(customColor));
+                    }
+
+                }
+            }
+        }
+        catch (Exception e){
+
+            Log.d(TAG, "Incorrect color code for App bar.");
+        }
+    }
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setStatusBarColor();
+        setActionBarColor();
 
         // setting up local listener
         Log.d(TAG, "onCreate: setting up local listener");
