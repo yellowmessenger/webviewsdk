@@ -37,32 +37,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    String configData = "{" +
-            "\"botID\": \""+botId+"\"," +
-            "\"enableSpeech\": \"false\"," +
-            "\"enableHistory\": \"true\"" +
-            "}";
-
-// IDK
-//    String configData = "{" +
-//            "\"botName\": \"SomeBotName\"," +
-//            "\"botID\": \"x1562765523121\"," +
-//            "\"enableSpeech\": \"false\"" +
-//            "}";
-
-//MPL
-//        String configData = "{" +
-//            "\"botName\": \"SomeBotName\"," +
-//            "\"botID\": \"x1592302653259\"," +
-//            "\"enableSpeech\": \"false\"" +
-//            "}";
-
-
-
-
-
-
     HashMap<String, Object> payloadData = new HashMap<>();
+    HashMap<String, Object> configurations = new HashMap<>();
+    String configData;
+
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +53,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        int actionBarColor = ContextCompat.getColor(this, R.color.colorPrimary);
+        int statusBarColor = ContextCompat.getColor(this, R.color.colorPrimaryDark);
 
         YMBotPlugin pluginYM =  YMBotPlugin.getInstance();
+        configurations.put("botID", botId);
+        configurations.put("enableSpeech", "false");
+        configurations.put("enableHistory", "true");
+        configurations.put("actionBarColor", Integer.toString(actionBarColor));
+        configurations.put("statusBarColor", Integer.toString(statusBarColor));
+        configData = YMBotPlugin.mapToString(configurations);
+
         try {
             pluginYM.init(configData, new BotEventListener() {
 
@@ -79,18 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(BotEventsModel botEvent) {
 
                     switch (botEvent.getCode()){
-//                        case "hla_event" :
-//                            HashMap<String, Object> customData = new HashMap<>();
-//                            HashMap<String, Object> payloadData1 = new HashMap<>();
-//                            customData.put("imagePath","/storage/emulated/0/Pictures/JPEG_20200930_152654_7830371160876443634.jpg");
-//                            pluginYM.setCustomData(customData);
-//                            payloadData1.put("UserId","1602659471019");
-//                            payloadData1.put("platform","Android-App");
-//                            pluginYM.setPayload(payloadData1);
-//                            pluginYM.startChatBot(MainActivity.this);
-//
-//                            break;
-
                         case "request-camera-open" :
                             HashMap<String, Object> customData = new HashMap<>();
                             HashMap<String, Object> payloadData1 = new HashMap<>();
@@ -100,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                             payloadData1.put("platform","Android-App");
                             pluginYM.setPayload(payloadData1);
                             pluginYM.startChatBot(MainActivity.this);
+                            payloadData1.toString();
 
                         break;
 
@@ -166,13 +147,14 @@ public class MainActivity extends AppCompatActivity {
         pluginYM.setPayload(payloadData);
 
 
+
         //Setting Color
-        HashMap<String, Object> customSettings = new HashMap<> ();
-        int actionBarColor = ContextCompat.getColor(this, R.color.colorPrimary);
-        int statusBarColor = ContextCompat.getColor(this, R.color.colorPrimaryDark);
-        customSettings.put("actionBarColor", String.valueOf(actionBarColor));
-        customSettings.put("statusBarColor", String.valueOf(statusBarColor));
-        pluginYM.setCustomData(customSettings);
+//        HashMap<String, Object> customSettings = new HashMap<> ();
+//        int actionBarColor = ContextCompat.getColor(this, R.color.colorPrimary);
+//        int statusBarColor = ContextCompat.getColor(this, R.color.colorPrimaryDark);
+//        customSettings.put("actionBarColor", String.valueOf(actionBarColor));
+//        customSettings.put("statusBarColor", String.valueOf(statusBarColor));
+//        pluginYM.setCustomData(customSettings);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);

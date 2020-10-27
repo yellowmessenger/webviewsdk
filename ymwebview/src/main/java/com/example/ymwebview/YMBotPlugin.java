@@ -9,7 +9,9 @@ import com.example.ymwebview.models.BotEventsModel;
 import com.google.gson.Gson;
 
 import  com.example.ymwebview.models.ConfigDataModel;
+import com.google.gson.GsonBuilder;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class YMBotPlugin {
@@ -76,6 +78,13 @@ public class YMBotPlugin {
         else
             listener.onFailure("An error occurred.");
     }
+
+   public static String mapToString(HashMap<String, Object> map){
+        String jsonString;
+        Gson gson = new GsonBuilder().create();
+        jsonString = gson.toJson(map);
+        return jsonString;
+   }
 
 }
 

@@ -22,7 +22,7 @@ allprojects {
 dependencies {
     ...
     ...
-	   implementation 'com.github.yellowmessenger:webviewsdk:0.2.9'
+	   implementation 'com.github.yellowmessenger:webviewsdk:0.3.0'
 
 
 }
@@ -39,10 +39,8 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate() {
         super.onCreate();
         //Configuration data
-        String configData = "{" +
-            "\"botName\": \"Bot-Name\"," +
-            "\"botID\": \"<REPLACE-WITH-BOT-ID>\"" +
-            "}";
+        HashMap<String, Object> configurations = new HashMap<>();
+        String configData;
         //Payload attributes
         HashMap<String, Object> payloadData = new HashMap<>();
         //Important
@@ -58,6 +56,18 @@ public class MainActivity extends AppCompatActivity {
         
         //Initialize the bot
         YMBotPlugin pluginYM =  YMBotPlugin.getInstance();
+
+        //Setting Config data.
+        configurations.put("botID", botId);
+        configurations.put("enableSpeech", "false");
+        configurations.put("enableHistory", "true");
+        configurations.put("actionBarColor", Integer.toString(actionBarColor));
+        configurations.put("statusBarColor", Integer.toString(statusBarColor));
+        configData = YMBotPlugin.mapToString(configurations);
+
+
+
+
         pluginYM.init(configData, new BotEventListener() {
             @Override
             public void onSuccess(BotEventsModel botEvent) {

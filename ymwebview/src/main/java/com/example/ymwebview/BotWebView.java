@@ -2,6 +2,7 @@ package com.example.ymwebview;
 
 
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -90,7 +91,7 @@ public class BotWebView extends AppCompatActivity {
 
     public void setStatusBarColor(){
         try{
-        String color = ConfigDataModel.getInstance().getCustomDataByKey("statusBarColor");
+        String color = ConfigDataModel.getInstance().getConfig("statusBarColor");
         boolean isHexCode = color.matches("-?[0-9a-fA-F]+");
 
             Log.d(TAG, "setStatusBarColor: "+isHexCode);
@@ -127,7 +128,7 @@ public class BotWebView extends AppCompatActivity {
 
     public void setActionBarColor(){
         try{
-            String color = ConfigDataModel.getInstance().getCustomDataByKey("actionBarColor");
+            String color = ConfigDataModel.getInstance().getConfig("actionBarColor");
             boolean isHexCode = color.matches("-?[0-9a-fA-F]+");
             int customColor = -1;
             try {
@@ -155,6 +156,36 @@ public class BotWebView extends AppCompatActivity {
         }
     }
 
+    public void setOverviewColor(){
+        try{
+        String color = ConfigDataModel.getInstance().getConfig("actionBarColor");
+
+        boolean isHexCode = color.matches("-?[0-9a-fA-F]+");
+        int customColor = -1;
+        try {
+            customColor = isHexCode ? Integer.parseInt(color, 16)  : Integer.parseInt(color);
+        }
+        catch (Exception e){
+            Log.d(TAG, e.getMessage());
+        }
+
+        if(customColor != -1) {
+
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                ActivityManager.TaskDescription td = new ActivityManager.TaskDescription(null, null, customColor);
+            }
+        }
+    }
+        catch (Exception e){
+
+        Log.d(TAG, "Incorrect color code for overview title bar.");
+    }
+
+
+
+    }
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -163,6 +194,7 @@ public class BotWebView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setStatusBarColor();
         setActionBarColor();
+        setOverviewColor();
 
         // setting up local listener
         Log.d(TAG, "onCreate: setting up local listener");
