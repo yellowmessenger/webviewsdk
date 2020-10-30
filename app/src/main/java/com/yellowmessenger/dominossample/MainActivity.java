@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
 //    String botId = "x1589521906227";
 
+//    zenyum
+//    String botId = "x1595342641260";
+
 
 
     HashMap<String, Object> payloadData = new HashMap<>();
@@ -53,10 +56,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//        int actionBarColor = Color.parseColor("#ffffff");
         int actionBarColor = ContextCompat.getColor(this, R.color.colorPrimary);
-        int statusBarColor = ContextCompat.getColor(this, R.color.colorPrimaryDark);
+        int statusBarColor = ContextCompat.getColor(this, R.color.customColor);
+
+
 
         YMBotPlugin pluginYM =  YMBotPlugin.getInstance();
+
         configurations.put("botID", botId);
         configurations.put("enableSpeech", "false");
         configurations.put("enableHistory", "true");
@@ -142,8 +149,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        // let obj = {
+//     "treatmentID": "5f80321c0bf784701b43bb0d",
+//     "devicePlatform": "IOS",
+//     "userId": "5f8030a40bf784701b43bb0a",
+//     "email": "shani111@zenyumtest.com",
+//     "firstName": "Shani",
+//     "lastName": "Shahul",
+//     "country": "Singapore",
+//     "phoneNumber": " ",
+//     "employeeEmail": "akshayv@zenyumtest.com",
+//     "employeeFirstName": "Akshay",
+//     "employeeLastName": "Venugopal"
+// }
+
         payloadData.put("Platform", "Android-App");
-        payloadData.put("UserId","1602659471019");
+        payloadData.put("UserId","5f8030a40bf784701b43bb0a");
+        payloadData.put("firstName","Shani");
+        payloadData.put("email","akshayv@zenyumtest.com");
+        payloadData.put("employeeEmail","akshayv@zenyumtest.com");
         pluginYM.setPayload(payloadData);
 
 

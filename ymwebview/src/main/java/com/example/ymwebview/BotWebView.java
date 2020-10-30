@@ -92,14 +92,15 @@ public class BotWebView extends AppCompatActivity {
     public void setStatusBarColor(){
         try{
         String color = ConfigDataModel.getInstance().getConfig("statusBarColor");
-        boolean isHexCode = color.matches("-?[0-9a-fA-F]+");
+//        boolean isHexCode = color.matches("-?[0-9a-fA-F]+");
 
-            Log.d(TAG, "setStatusBarColor: "+isHexCode);
+//            Log.d(TAG, "setStatusBarColor: "+isHexCode);
 
         int customColor = -1;
         try {
 
-            customColor = isHexCode ? Integer.parseInt(color, 16)  : Integer.parseInt(color);
+            customColor =Integer.parseInt(color);
+//            customColor = isHexCode ? Integer.parseInt(color, 16)  : Integer.parseInt(color);
 
         }
         catch (Exception e){
@@ -132,7 +133,7 @@ public class BotWebView extends AppCompatActivity {
             boolean isHexCode = color.matches("-?[0-9a-fA-F]+");
             int customColor = -1;
             try {
-                customColor = isHexCode ? Integer.parseInt(color, 16)  : Integer.parseInt(color);
+                customColor = Integer.parseInt(color);
             }
             catch (Exception e){
                 Log.d(TAG, e.getMessage());
@@ -163,7 +164,7 @@ public class BotWebView extends AppCompatActivity {
         boolean isHexCode = color.matches("-?[0-9a-fA-F]+");
         int customColor = -1;
         try {
-            customColor = isHexCode ? Integer.parseInt(color, 16)  : Integer.parseInt(color);
+            customColor =  Integer.parseInt(color);
         }
         catch (Exception e){
             Log.d(TAG, e.getMessage());
