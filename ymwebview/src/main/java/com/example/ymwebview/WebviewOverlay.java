@@ -1,6 +1,7 @@
 package com.example.ymwebview;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -53,14 +54,16 @@ public class WebviewOverlay extends Fragment  {
     private static final int INPUT_FILE_REQUEST_CODE = 1;
     private static final int FILECHOOSER_RESULTCODE = 1;
 
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
         myWebView = (WebView) preLoadWebView();
         return myWebView;
     }
+
 
     public void closeBot(){
         myWebView.loadUrl("");
@@ -133,13 +136,18 @@ public class WebviewOverlay extends Fragment  {
         super.onStop();
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
+
     }
 
 
-    private File createImageFile() throws IOException {
+
+
+
+        private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
@@ -157,6 +165,8 @@ public class WebviewOverlay extends Fragment  {
     public void onPause() {
         super.onPause();
     }
+
+
 
 
     public View preLoadWebView() {

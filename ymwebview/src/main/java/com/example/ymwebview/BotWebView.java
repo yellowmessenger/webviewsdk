@@ -5,6 +5,8 @@ package com.example.ymwebview;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -171,10 +173,9 @@ public class BotWebView extends AppCompatActivity {
         }
 
         if(customColor != -1) {
-
-
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
                 ActivityManager.TaskDescription td = new ActivityManager.TaskDescription(null, null, customColor);
+                 this.setTaskDescription(td);
             }
         }
     }
@@ -254,6 +255,13 @@ public class BotWebView extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setOverviewColor();
+    }
+
 
     public void runUpload(String uid){
         try {
