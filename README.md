@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         //Important
         payloadData.put("platform","Android-App");
         
-        payloadData.put("user-id","");
+        payloadData.put("UserId","<Some-Unique-Identifier>");
         payloadData.put("access-token","");
         payloadData.put("refresh-token","");
         payloadData.put("mobile-number","");
