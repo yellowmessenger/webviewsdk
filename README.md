@@ -105,7 +105,7 @@ The SDK takes in the botId as a input configuration when the plugin is initialis
  pluginYM.setBotId("<NEW-BOT-ID>");
 ```
 
-```
+
 ## Important
 If facing problem in release build, add the following configuration in the app's proguard-rules.pro file.
 ```java
