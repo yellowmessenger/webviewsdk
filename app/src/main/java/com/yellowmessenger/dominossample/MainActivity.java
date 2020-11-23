@@ -6,8 +6,12 @@ import android.os.Bundle;
 import com.example.ymwebview.BotEventListener;
 import com.example.ymwebview.YMBotPlugin;
 import com.example.ymwebview.models.BotEventsModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.messaging.FirebaseMessaging;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -17,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -27,10 +32,15 @@ public class MainActivity extends AppCompatActivity {
     String botId = "x1599123773718";
 
 
+// fREADom
+//    String botId = "x1589521906227"; // testing notification etc.
+//    String botId = "x1585723893614"; // staging
+
+//    String botId = "x1597918994847";
+
 
     // HLA
-//    String botId = "x1592218269082";
-
+    String botId2 = "x1592218269082";
 
 
 //    String botId = "x1589521906227";
@@ -43,9 +53,7 @@ public class MainActivity extends AppCompatActivity {
     HashMap<String, Object> payloadData = new HashMap<>();
     HashMap<String, Object> configurations = new HashMap<>();
     String configData;
-
-
-
+    String firebaseToken;
 
 
 
@@ -53,6 +61,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         YMBotPlugin pluginYM =  YMBotPlugin.getInstance();
 
         configurations.put("botID", botId);
-        configurations.put("enableSpeech", "false");
+        configurations.put("enableSpeech", "true");
         configurations.put("enableHistory", "true");
         configurations.put("actionBarColor", Integer.toString(actionBarColor));
         configurations.put("statusBarColor", Integer.toString(statusBarColor));
@@ -76,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onSuccess(BotEventsModel botEvent) {
+
 
                     switch (botEvent.getCode()){
                         case "request-camera-open" :
@@ -132,6 +147,33 @@ public class MainActivity extends AppCompatActivity {
             Log.w("Plugin Exception", "onCreate: "+e.getMessage());
         }
 
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("Notification", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        firebaseToken = token;
+                        payloadData.put("Platform", "Android-App");
+                        payloadData.put("deviceToken", firebaseToken);
+
+
+                        pluginYM.setPayload(payloadData);
+
+                        // Log and toast
+                        String msg = token;
+                        Log.d("Notification", msg);
+                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+
+
+                });
+
 
         Switch languageSwitch = findViewById(R.id.toggleLanguage);
 
@@ -150,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        // let obj = {
+// let obj = {
 //     "treatmentID": "5f80321c0bf784701b43bb0d",
 //     "devicePlatform": "IOS",
 //     "userId": "5f8030a40bf784701b43bb0a",
@@ -165,10 +207,9 @@ public class MainActivity extends AppCompatActivity {
 // }
 
         payloadData.put("Platform", "Android-App");
-        payloadData.put("UserId","5f8030a40bf784701b43bb0a");
-        payloadData.put("firstName","Shani");
-        payloadData.put("email","akshayv@zenyumtest.com");
-        payloadData.put("employeeEmail","akshayv@zenyumtest.com");
+        payloadData.put("deviceToken", firebaseToken);
+
+
         pluginYM.setPayload(payloadData);
 
 
@@ -184,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
+            pluginYM.setBotId(botId2);
            pluginYM.startChatBot(this);
         });
     }

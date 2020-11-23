@@ -36,6 +36,13 @@ public class ConfigDataModel{
         }
         return false;
     }
+    public boolean setConfigByKey(String key, String value) {
+        if (!key.isEmpty() && !value.isEmpty()) {
+            config.put(key,value);
+            return true;
+        }
+        return false;
+    }
 
     public String getConfig(String key) {
         if(config.get(key) != null){

@@ -58,6 +58,10 @@ public class YMBotPlugin {
         myContext.startActivity(_intent);
     }
 
+    public boolean setBotId(String botId){
+       return  ConfigDataModel.getInstance().setConfigByKey("botID", botId);
+    }
+
 
     public void setPayload(Map botPayload){
         ConfigDataModel.getInstance().emptyPayload();
