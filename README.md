@@ -22,7 +22,7 @@ allprojects {
 dependencies {
     ...
     ...
-	   implementation 'com.github.yellowmessenger:webviewsdk:0.3.1'
+	   implementation 'com.github.yellowmessenger:webviewsdk:0.3.2'
 
 
 }
@@ -96,6 +96,15 @@ public class MainActivity extends AppCompatActivity {
     
 
 }
+
+```
+## Features
+The SDK takes in the botId as a input configuration when the plugin is initialised. to change the default BotId, use the following method.
+
+```java
+ pluginYM.setBotId("<NEW-BOT-ID>");
+```
+
 ```
 ## Important
 If facing problem in release build, add the following configuration in the app's proguard-rules.pro file.
