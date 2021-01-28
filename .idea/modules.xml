@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Dominos Sample.iml" filepath="$PROJECT_DIR$/Dominos Sample.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ymwebview/ymwebview.iml" filepath="$PROJECT_DIR$/ymwebview/ymwebview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Dominos_Sample.iml" filepath="$PROJECT_DIR$/.idea/modules/Dominos_Sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Dominos_Sample.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Dominos_Sample.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ymwebview/Dominos_Sample.ymwebview.iml" filepath="$PROJECT_DIR$/.idea/modules/ymwebview/Dominos_Sample.ymwebview.iml" />
     </modules>
   </component>
 </project>

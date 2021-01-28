@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     // HLA
-    String botId2 = "x1592218269082";
+//    String botId2 = "x1592218269082";
 
 
 //    String botId = "x1589521906227";
@@ -79,8 +79,9 @@ public class MainActivity extends AppCompatActivity {
         YMBotPlugin pluginYM =  YMBotPlugin.getInstance();
 
         configurations.put("botID", botId);
-        configurations.put("enableSpeech", "true");
+        configurations.put("enableSpeech", "false");
         configurations.put("enableHistory", "true");
+        configurations.put("disableCloseButton", "true");
         configurations.put("actionBarColor", Integer.toString(actionBarColor));
         configurations.put("statusBarColor", Integer.toString(statusBarColor));
         configData = YMBotPlugin.mapToString(configurations);
@@ -162,7 +163,6 @@ public class MainActivity extends AppCompatActivity {
                         payloadData.put("Platform", "Android-App");
                         payloadData.put("deviceToken", firebaseToken);
 
-
                         pluginYM.setPayload(payloadData);
 
                         // Log and toast
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
-            pluginYM.setBotId(botId2);
+//            pluginYM.setBotId(botId2);
            pluginYM.startChatBot(this);
         });
     }

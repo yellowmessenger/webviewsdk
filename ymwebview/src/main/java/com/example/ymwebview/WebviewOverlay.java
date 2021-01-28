@@ -182,7 +182,7 @@ public class WebviewOverlay extends Fragment  {
         String enableHistory = ConfigDataModel.getInstance().getConfig("enableHistory");
         myWebView = new WebView(context);
 //        + "&ymAuthenticationToken=" + 12345
-//         final String botUrl = "https://priyankupadhyay.github.io/pages/mobile.html?botId=" + botId  + "&ym.payload=" + payloadJSON;
+//         final String botUrl = "https://priyankupadhyay.github.io/pages/mobile.html?botId=" + botId  + "&enableHistory=true"+ "&ym.payload=" + payloadJSON;
          final String botUrl = "https://yellowmessenger.github.io/pages/app/mobile.html?botId=" + botId + "&enableHistory=" + enableHistory + "&ym.payload=" + payloadJSON;
 
 

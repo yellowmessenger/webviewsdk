@@ -247,12 +247,19 @@ public class BotWebView extends AppCompatActivity {
             });
         }
 
-        ImageButton backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(view->{
-            YMBotPlugin.getInstance().emitEvent(new BotEventsModel("bot-closed",""));
-            fh.closeBot();
-            this.finish();
-        });
+
+
+            ImageButton backButton = findViewById(R.id.backButton);
+            backButton.setOnClickListener(view -> {
+                YMBotPlugin.getInstance().emitEvent(new BotEventsModel("bot-closed", ""));
+                fh.closeBot();
+                this.finish();
+            });
+        String disableCloseButton = ConfigDataModel.getInstance().getConfig("disableCloseButton");
+        if(Boolean.parseBoolean(disableCloseButton)) {
+            backButton.setVisibility(View.INVISIBLE);
+        }
+
 
     }
 

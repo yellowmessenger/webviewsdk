@@ -15,11 +15,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
         YMBotPlugin pluginYM =  YMBotPlugin.getInstance();
         Log.d("Notification", "got message: "+ remoteMessage.getNotification().getBody());
-
-//        pluginYM.startChatBot(this);
-
-
     }
+
+
 
     @Override
     public void onDeletedMessages() {
