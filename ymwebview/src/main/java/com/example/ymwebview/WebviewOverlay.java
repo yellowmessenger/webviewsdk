@@ -249,6 +249,11 @@ public class WebviewOverlay extends Fragment  {
                 contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
                 contentSelectionIntent.setType("*/*");
 
+                String hideCameraForUpload = ConfigDataModel.getInstance().getConfig("hideCameraForUpload");
+                if(Boolean.parseBoolean(hideCameraForUpload)){
+                    takePictureIntent = null;
+                }
+
                 Intent[] intentArray;
                 if (takePictureIntent != null) {
                     intentArray = new Intent[]{takePictureIntent};
@@ -301,9 +306,13 @@ public class WebviewOverlay extends Fragment  {
                 // Create file chooser intent
                 Intent chooserIntent = Intent.createChooser(i, "Image Chooser");
 
-                // Set camera intent to file chooser
-                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS
-                        , new Parcelable[] { captureIntent });
+                String hideCameraForUpload = ConfigDataModel.getInstance().getConfig("hideCameraForUpload");
+                if(!Boolean.parseBoolean(hideCameraForUpload)){
+                    // Set camera intent to file chooser
+                    chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS
+                            , new Parcelable[] { captureIntent });
+                }
+
 
                 // On select image call onActivityResult method of activity
                 getActivity().startActivityForResult(chooserIntent, FILECHOOSER_RESULTCODE);

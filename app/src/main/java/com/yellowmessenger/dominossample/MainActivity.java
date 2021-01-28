@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 //    String botId = "x1597918994847";
 
  // Home Credit
-    String botId = "x1599123773718";
+//    String botId = "x1599123773718";
 
 
 // fREADom
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     // HLA
-//    String botId2 = "x1592218269082";
+    String botId = "x1592218269082";
 
 
 //    String botId = "x1589521906227";
@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
         configurations.put("botID", botId);
         configurations.put("enableSpeech", "false");
         configurations.put("enableHistory", "true");
-        configurations.put("disableCloseButton", "true");
+//        configurations.put("disableCloseButton", "true");
+//        configurations.put("hideCameraForUpload", "true");
         configurations.put("actionBarColor", Integer.toString(actionBarColor));
         configurations.put("statusBarColor", Integer.toString(statusBarColor));
         configData = YMBotPlugin.mapToString(configurations);
