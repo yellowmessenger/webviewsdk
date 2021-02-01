@@ -22,7 +22,7 @@ allprojects {
 dependencies {
     ...
     ...
-	   implementation 'com.github.yellowmessenger:webviewsdk:0.3.3'
+	   implementation 'com.github.yellowmessenger:webviewsdk:0.3.4'
 
 
 }
@@ -52,17 +52,20 @@ public class MainActivity extends AppCompatActivity {
         payloadData.put("mobile-number","");
         payloadData.put("journey-slug","");
         payloadData.put("user-state","");
+
         //You can add other payload attributes in the same format.
         
         //Initialize the bot
         YMBotPlugin pluginYM =  YMBotPlugin.getInstance();
 
         //Setting Config data.
-        configurations.put("botID", botId);
-        configurations.put("enableSpeech", "false");
-        configurations.put("enableHistory", "true");
-        configurations.put("actionBarColor", Integer.toString(actionBarColor));
-        configurations.put("statusBarColor", Integer.toString(statusBarColor));
+        configurations.put("botID", botId); // Required.
+        configurations.put("enableSpeech", "false"); // optional: to enable support for speech recognition.
+        configurations.put("enableHistory", "true"); // optional: shows previous chat history.
+        configurations.put("actionBarColor", Integer.toString(actionBarColor)); // optional: customise actionBar color
+        configurations.put("statusBarColor", Integer.toString(statusBarColor)); // optional: customise statusBar color
+        configurations.put("hideCameraForUpload", "true"); // optional: Hide camera option during file upload.
+        configurations.put("disableCloseButton", "true"); // optional: disable close chatbot button.
         configData = YMBotPlugin.mapToString(configurations);
 
 
