@@ -294,12 +294,13 @@ public class BotWebView extends AppCompatActivity {
         final MediaType MEDIA_TYPE = imagePath.endsWith("png") ?
                 MediaType.parse("image/png") : MediaType.parse("image/jpeg");
         Log.d(TAG, "run: "+postUrl);
-        Log.d(TAG, sourceFile.getName()+"."+MEDIA_TYPE.subtype());
+        Log.d(TAG, sourceFile.getName());
 
 
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("images", sourceFile.getName()+"."+MEDIA_TYPE.subtype(), RequestBody.create(MEDIA_TYPE, sourceFile))
+                .addFormDataPart("images", sourceFile.getName(), RequestBody.create(MEDIA_TYPE, sourceFile))
+//                .addFormDataPart("images", sourceFile.getName()+"."+MEDIA_TYPE.subtype(), RequestBody.create(MEDIA_TYPE, sourceFile))
                 .build();
 
         Request request = new Request.Builder()

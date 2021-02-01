@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 //    String botId = "x1597918994847";
 
  // Home Credit
-//    String botId = "x1599123773718";
+    String botId = "x1599123773718";
 
 
 // fREADom
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     // HLA
-    String botId = "x1592218269082";
+//    String botId = "x1592218269082";
 
 
 //    String botId = "x1589521906227";
@@ -86,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
         configurations.put("actionBarColor", Integer.toString(actionBarColor));
         configurations.put("statusBarColor", Integer.toString(statusBarColor));
         configData = YMBotPlugin.mapToString(configurations);
+        HashMap<String, Object> customData = new HashMap<>();
+        customData.put("imagePath","/storage/emulated/0/Pictures/JPEG_20200930_152654_7830371160876443634.jpg");
+        pluginYM.setCustomData(customData);
 
         try {
             pluginYM.init(configData, new BotEventListener() {
