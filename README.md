@@ -22,7 +22,7 @@ allprojects {
 dependencies {
     ...
     ...
-	   implementation 'com.github.yellowmessenger:webviewsdk:0.3.4'
+	   implementation 'com.github.yellowmessenger:webviewsdk:0.3.5'
 
 
 }
