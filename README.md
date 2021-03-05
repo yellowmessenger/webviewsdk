@@ -1,3 +1,6 @@
+# ⚠️ This repo has been deprecated
+This repo has been deprecated in favour of [YMChatbot-Android](https://github.com/yellowmessenger/YMChatbot-Android)
+
 Yellow Messenger WebView SDK
 =======================
 
