@@ -370,7 +370,6 @@ public class WebviewOverlay extends Fragment {
                                 startActivity(browserIntent);
                             } catch (Exception e) {
                                 // Exception occurred
-                                return true;
                             }
                         }
                         return true;
