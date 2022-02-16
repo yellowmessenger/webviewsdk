@@ -1,26 +1,21 @@
 package com.example.ymwebview;
 
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Parcelable;
-import android.provider.MediaStore;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
 import android.os.Message;
+import android.os.Parcelable;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.ConsoleMessage;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
@@ -28,6 +23,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.ymwebview.models.ConfigDataModel;
 import com.example.ymwebview.models.JavaScriptInterface;
@@ -42,7 +41,7 @@ import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
-public class WebviewOverlay extends Fragment  {
+public class WebviewOverlay extends Fragment {
     private final String TAG = "YM WebView Plugin";
     private WebView myWebView;
 
@@ -55,7 +54,6 @@ public class WebviewOverlay extends Fragment  {
     private static final int FILECHOOSER_RESULTCODE = 1;
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,7 +63,7 @@ public class WebviewOverlay extends Fragment  {
     }
 
 
-    public void closeBot(){
+    public void closeBot() {
         myWebView.loadUrl("");
     }
 
@@ -144,10 +142,7 @@ public class WebviewOverlay extends Fragment  {
     }
 
 
-
-
-
-        private File createImageFile() throws IOException {
+    private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
@@ -167,11 +162,8 @@ public class WebviewOverlay extends Fragment  {
     }
 
 
-
-
     public View preLoadWebView() {
         // Testing API call.
-
 
 
         // Preload start
@@ -182,7 +174,7 @@ public class WebviewOverlay extends Fragment  {
         String enableHistory = ConfigDataModel.getInstance().getConfig("enableHistory");
         myWebView = new WebView(context);
         Log.d(TAG, getString(R.string.chatbot_base_url));
-        final String botUrl = getString(R.string.chatbot_base_url)+"?botId=" + botId + "&enableHistory=" + enableHistory + "&ym.payload=" + payloadJSON;
+        final String botUrl = getString(R.string.chatbot_base_url) + "?botId=" + botId + "&enableHistory=" + enableHistory + "&ym.payload=" + payloadJSON;
 
 
         Log.d(TAG, "onCreate: " + botUrl);
@@ -207,6 +199,7 @@ public class WebviewOverlay extends Fragment  {
             private WebChromeClient.CustomViewCallback mCustomViewCallback;
             private int mOriginalOrientation;
             private int mOriginalSystemUiVisibility;
+
             @Override
             public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
                 Log.d("WebView", consoleMessage.message());
@@ -249,7 +242,7 @@ public class WebviewOverlay extends Fragment  {
                 contentSelectionIntent.setType("*/*");
 
                 String hideCameraForUpload = ConfigDataModel.getInstance().getConfig("hideCameraForUpload");
-                if(Boolean.parseBoolean(hideCameraForUpload)){
+                if (Boolean.parseBoolean(hideCameraForUpload)) {
                     takePictureIntent = null;
                 }
 
@@ -306,10 +299,10 @@ public class WebviewOverlay extends Fragment  {
                 Intent chooserIntent = Intent.createChooser(i, "Image Chooser");
 
                 String hideCameraForUpload = ConfigDataModel.getInstance().getConfig("hideCameraForUpload");
-                if(!Boolean.parseBoolean(hideCameraForUpload)){
+                if (!Boolean.parseBoolean(hideCameraForUpload)) {
                     // Set camera intent to file chooser
                     chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS
-                            , new Parcelable[] { captureIntent });
+                            , new Parcelable[]{captureIntent});
                 }
 
 
@@ -331,17 +324,15 @@ public class WebviewOverlay extends Fragment  {
                 openFileChooser(uploadMsg, acceptType);
             }
 
-            public Bitmap getDefaultVideoPoster()
-            {
+            public Bitmap getDefaultVideoPoster() {
                 if (mCustomView == null) {
                     return null;
                 }
                 return BitmapFactory.decodeResource(context.getResources(), 2130837573);
             }
 
-            public void onHideCustomView()
-            {
-                ((FrameLayout)getActivity().getWindow().getDecorView()).removeView(this.mCustomView);
+            public void onHideCustomView() {
+                ((FrameLayout) getActivity().getWindow().getDecorView()).removeView(this.mCustomView);
                 this.mCustomView = null;
                 getActivity().getWindow().getDecorView().setSystemUiVisibility(this.mOriginalSystemUiVisibility);
                 getActivity().setRequestedOrientation(this.mOriginalOrientation);
@@ -349,10 +340,8 @@ public class WebviewOverlay extends Fragment  {
                 this.mCustomViewCallback = null;
             }
 
-            public void onShowCustomView(View paramView, WebChromeClient.CustomViewCallback paramCustomViewCallback)
-            {
-                if (this.mCustomView != null)
-                {
+            public void onShowCustomView(View paramView, WebChromeClient.CustomViewCallback paramCustomViewCallback) {
+                if (this.mCustomView != null) {
                     onHideCustomView();
                     return;
                 }
@@ -360,7 +349,7 @@ public class WebviewOverlay extends Fragment  {
                 this.mOriginalSystemUiVisibility = getActivity().getWindow().getDecorView().getSystemUiVisibility();
                 this.mOriginalOrientation = getActivity().getRequestedOrientation();
                 this.mCustomViewCallback = paramCustomViewCallback;
-                ((FrameLayout)getActivity().getWindow().getDecorView()).addView(this.mCustomView, new FrameLayout.LayoutParams(-1, -1));
+                ((FrameLayout) getActivity().getWindow().getDecorView()).addView(this.mCustomView, new FrameLayout.LayoutParams(-1, -1));
                 getActivity().getWindow().getDecorView().setSystemUiVisibility(3846 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             }
 
@@ -374,9 +363,15 @@ public class WebviewOverlay extends Fragment  {
                 newWebView.setWebViewClient(new WebViewClient() {
                     @Override
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW);
-                        browserIntent.setData(Uri.parse(url));
-                        startActivity(browserIntent);
+                        if (url != null && !url.isEmpty()) {
+                            try {
+                                Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+                                browserIntent.setData(Uri.parse(url));
+                                startActivity(browserIntent);
+                            } catch (Exception e) {
+                                // Exception occurred
+                            }
+                        }
                         return true;
                     }
                 });
@@ -390,9 +385,9 @@ public class WebviewOverlay extends Fragment  {
     }
 
 
-        public void sendEvent(String s){
-            Log.d("Sending Event: ", s);
-            myWebView.loadUrl("javascript:sendEvent(\""+s+"\");");
+    public void sendEvent(String s) {
+        Log.d("Sending Event: ", s);
+        myWebView.loadUrl("javascript:sendEvent(\"" + s + "\");");
     }
 //    @Override
 //    public void onPageStarted(String url, Bitmap favicon) {
