@@ -1,31 +1,32 @@
 package com.example.ymwebview;
 
 import android.app.ProgressDialog;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.example.ymwebview.models.ConfigDataModel;
 import com.example.ymwebview.models.JavaScriptInterface;
 import com.google.gson.Gson;
+
 import java.net.URLEncoder;
 import java.util.Map;
+
 import im.delight.android.webview.AdvancedWebView;
 
 public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener {
@@ -41,12 +42,11 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
         progressDialog.setTitle("Please wait.");
         progressDialog.setMessage("The bot is initializing...");
         progressDialog.setCanceledOnTouchOutside(false);
-         try {
-           progressDialog.show();
-       }
-       catch (Exception e){
-           Log.e(TAG, "YmPlugin: Bot loading dialog ", e );
-       }
+        try {
+            progressDialog.show();
+        } catch (Exception e) {
+            Log.e(TAG, "YmPlugin: Bot loading dialog ", e);
+        }
         myWebView = (AdvancedWebView) preLoadWebView();
         return myWebView;
     }
@@ -93,9 +93,11 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
                 newWebView.setWebViewClient(new WebViewClient() {
                     @Override
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW);
-                        browserIntent.setData(Uri.parse(url));
-                        startActivity(browserIntent);
+                        if (url != null && !url.isEmpty()) {
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+                            browserIntent.setData(Uri.parse(url));
+                            startActivity(browserIntent);
+                        }
                         return true;
                     }
                 });
@@ -115,10 +117,11 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
 //            //super.onBackPressed();
 //        }
 
-        public void sendEvent(String s){
-            Log.d("Sending Event: ", s);
-            myWebView.loadUrl("javascript:sendEvent('"+s+"');");
+    public void sendEvent(String s) {
+        Log.d("Sending Event: ", s);
+        myWebView.loadUrl("javascript:sendEvent('" + s + "');");
     }
+
     @Override
     public void onPageStarted(String url, Bitmap favicon) {
     }
@@ -127,9 +130,8 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
     public void onPageFinished(String url) {
         try {
             progressDialog.dismiss();
-        }
-        catch (Exception e){
-            Log.e(TAG, "YmPlugin: Bot loading dialog dismiss ", e );
+        } catch (Exception e) {
+            Log.e(TAG, "YmPlugin: Bot loading dialog dismiss ", e);
         }
         myWebView.setVisibility(View.VISIBLE);
     }
@@ -139,11 +141,10 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
     public void onPageError(int errorCode, String description, String failingUrl) {
         try {
             progressDialog.dismiss();
+        } catch (Exception e) {
+            Log.e(TAG, "YmPlugin: Bot loading dialog dismiss ", e);
         }
-        catch (Exception e){
-            Log.e(TAG, "YmPlugin: Bot loading dialog dismiss ", e );
-        }
-        Log.e("WebView Error", "onPageError(errorCode = "+errorCode+",  description = "+description+",  failingUrl = "+failingUrl+")");
+        Log.e("WebView Error", "onPageError(errorCode = " + errorCode + ",  description = " + description + ",  failingUrl = " + failingUrl + ")");
     }
 
     @Override
