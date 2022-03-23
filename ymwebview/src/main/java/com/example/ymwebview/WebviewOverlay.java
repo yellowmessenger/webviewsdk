@@ -93,10 +93,14 @@ public class WebviewOverlay extends Fragment implements AdvancedWebView.Listener
                 newWebView.setWebViewClient(new WebViewClient() {
                     @Override
                     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                        if (url != null && !url.isEmpty()) {
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW);
-                            browserIntent.setData(Uri.parse(url));
-                            startActivity(browserIntent);
+                        try {
+                            if (url != null && !url.isEmpty()) {
+                                Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+                                browserIntent.setData(Uri.parse(url));
+                                startActivity(browserIntent);
+                            }
+                        } catch (Exception e) {
+                            //Exception occurred
                         }
                         return true;
                     }

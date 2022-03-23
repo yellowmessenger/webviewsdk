@@ -24,7 +24,7 @@
         android:layout_marginBottom="21dp"
         android:background="@android:drawable/ic_btn_speak_now"
         android:clickable="true"
-        android:tint="@color/design_default_color_surface"
+        android:tint="@color/colorWhite"
         android:visibility="invisible"
         app:srcCompat="@android:drawable/ic_btn_speak_now" />
 
